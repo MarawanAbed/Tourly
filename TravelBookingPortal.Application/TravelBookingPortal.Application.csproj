@@ -15,9 +15,4 @@
 		<PackageReference Include="MediatR" Version="12.5.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Login\Dtos\" />
-	  <Folder Include="Login\Helpers\" />
-	  <Folder Include="Login\Queries\" />
-	</ItemGroup>
 </Project>

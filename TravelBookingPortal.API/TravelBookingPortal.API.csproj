@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TravelBookingPortal.Application\TravelBookingPortal.Application.csproj" />
     <ProjectReference Include="..\TravelBookingPortal.Infrastructure\TravelBookingPortal.Infrastructure.csproj" />
   </ItemGroup>
