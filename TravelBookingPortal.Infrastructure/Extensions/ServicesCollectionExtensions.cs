@@ -42,6 +42,9 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IItineraryAndItemsSeeder, ItineraryAndItemsSeeder>();
             services.AddScoped<IReviewSeeder, ReviewSeeder>();
             services.AddScoped<ICitySeeder, CitySeeder>();
+            // Add SignalR 
+            services.AddSignalR();
+            
 
         }
 

@@ -1,5 +1,6 @@
 
 using Restaurants.Infrastructure.Extensions;
+using TravelBookingPortal.Infrastructure.Hubs;
 using TravelBookingPortal.Infrastructure.Seeder;
 
 namespace TravelBookingPortal.API
@@ -12,6 +13,7 @@ namespace TravelBookingPortal.API
 
             //add infrastructure
             builder.Services.AddInfrastructure(builder.Configuration);
+           
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -19,6 +21,8 @@ namespace TravelBookingPortal.API
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+            //Mapping HuBs
+            app.MapHub<BookingHub>("/bookingHub");
             var scope = app.Services.CreateScope();
             await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
             // Configure the HTTP request pipeline.
