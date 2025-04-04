@@ -8,6 +8,7 @@ using TravelBookingPortal.Domain.Enitites.User;
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Seeder;
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
+using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
 using TravelBookingPortal.Infrastructure.Seeder.ItinerariesAndItems;
 using TravelBookingPortal.Infrastructure.Seeder.Preferences;
@@ -40,6 +41,7 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IBookingSeeder, BookingSeeder>();
             services.AddScoped<IItineraryAndItemsSeeder, ItineraryAndItemsSeeder>();
             services.AddScoped<IReviewSeeder, ReviewSeeder>();
+            services.AddScoped<ICitySeeder, CitySeeder>();
 
         }
 

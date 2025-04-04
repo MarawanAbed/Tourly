@@ -20,14 +20,14 @@ namespace TravelBookingPortal.Infrastructure.Seeder.Reviews
                 {
                     new() {
                         UserId = john.Id,
-                        HotelId = 1,
+                        HotelId = 2,
                         Rating = 4,
                         Comment = "Great stay, friendly staff!",
                         CreatedAt = DateTime.UtcNow.AddDays(-1)
                     },
                     new() {
                         UserId = jane.Id,
-                        HotelId = 2,
+                        HotelId = 3,
                         Rating = 5,
                         Comment = "Amazing beach view!",
                         CreatedAt = DateTime.UtcNow.AddDays(-2)

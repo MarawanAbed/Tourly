@@ -1,6 +1,7 @@
 ﻿
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
+using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
 using TravelBookingPortal.Infrastructure.Seeder.ItinerariesAndItems;
 using TravelBookingPortal.Infrastructure.Seeder.Preferences;
@@ -18,7 +19,8 @@ namespace TravelBookingPortal.Infrastructure.Seeder
         IPreferenceSeeder preferenceSeeder,
         IBookingSeeder bookingSeeder,
         IItineraryAndItemsSeeder itinerarySeeder,
-        IReviewSeeder reviewSeeder
+        IReviewSeeder reviewSeeder,
+        ICitySeeder citySeeder
         ) : ITravelBookingSeeder
     {
         public async Task Seed()
@@ -30,6 +32,8 @@ namespace TravelBookingPortal.Infrastructure.Seeder
 
                 // Seed Users
                 await userSeeder.SeedUsers();
+                //Seed Cities
+                await citySeeder.SeedCities();
 
                 // Seed Hotels and Rooms
                 await hotelSeeder.SeedHotelsAndRooms();

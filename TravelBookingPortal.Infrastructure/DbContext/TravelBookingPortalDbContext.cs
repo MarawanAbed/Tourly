@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TravelBookingPortal.Domain.Enitites.BookingEntities;
+using TravelBookingPortal.Domain.Enitites.CityEnities;
 using TravelBookingPortal.Domain.Enitites.HotelEntities;
 using TravelBookingPortal.Domain.Enitites.ItineraryEntities;
 using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
@@ -21,6 +22,7 @@ namespace TravelBookingPortal.Infrastructure.DbContext
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Preference> UserPreferences { get; set; }
         public DbSet<ItineraryItem> ItineraryItems { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

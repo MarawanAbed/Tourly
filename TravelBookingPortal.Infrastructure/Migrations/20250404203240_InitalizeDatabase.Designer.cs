@@ -12,8 +12,8 @@ using TravelBookingPortal.Infrastructure.DbContext;
 namespace TravelBookingPortal.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelBookingPortalDbContext))]
-    [Migration("20250403212211_InitializeDatabase")]
-    partial class InitializeDatabase
+    [Migration("20250404203240_InitalizeDatabase")]
+    partial class InitalizeDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -206,6 +206,27 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.ToTable("Bookings");
                 });
 
+            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.CityEnities.City", b =>
+                {
+                    b.Property<int>("CityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CityId"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CityId");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.HotelEntities.Hotel", b =>
                 {
                     b.Property<int>("HotelId")
@@ -214,14 +235,13 @@ namespace TravelBookingPortal.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HotelId"));
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -229,6 +249,8 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("HotelId");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Hotels");
                 });
@@ -537,6 +559,17 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.HotelEntities.Hotel", b =>
+                {
+                    b.HasOne("TravelBookingPortal.Domain.Enitites.CityEnities.City", "City")
+                        .WithMany("Hotels")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
             modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.ItineraryEntities.Itinerary", b =>
                 {
                     b.HasOne("TravelBookingPortal.Domain.Enitites.User.ApplicationUser", "User")
@@ -598,6 +631,11 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.CityEnities.City", b =>
+                {
+                    b.Navigation("Hotels");
                 });
 
             modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.HotelEntities.Hotel", b =>
