@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using TravelBookingPortal.Application.Services.CityService.Abstraction;
-using TravelBookingPortal.Application.Services.CityService.Implementation;
+using TravelBookingPortal.Application.CityLogic.Queries.CityService.Abstraction;
+using TravelBookingPortal.Application.CityLogic.Queries.CityService.Implementation;
 
 namespace TravelBookingPortal.Application.Extensions
 {
@@ -12,7 +12,7 @@ namespace TravelBookingPortal.Application.Extensions
         {
             var applicationAssembly = typeof(ServicesCollectionExtensions).Assembly;
             //services.AddScoped<IRestaurantsServices, RestaurantsServices>();
-            //services.AddAutoMapper(applicationAssembly);
+            services.AddAutoMapper(applicationAssembly);
             //like that we tell automapper to scan all the assemblies in the solution
             services.AddValidatorsFromAssembly(applicationAssembly)
                 .AddFluentValidationAutoValidation();

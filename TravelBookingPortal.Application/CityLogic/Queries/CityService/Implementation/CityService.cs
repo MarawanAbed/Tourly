@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TravelBookingPortal.Application.Services.CityService.Abstraction;
+using TravelBookingPortal.Application.CityLogic.Queries.CityService.Abstraction;
 using TravelBookingPortal.Domain.Enitites.CityEnities;
 using TravelBookingPortal.Domain.Repositories.CityRepo;
 
-namespace TravelBookingPortal.Application.Services.CityService.Implementation
+namespace TravelBookingPortal.Application.CityLogic.Queries.CityService.Implementation
 {
     public class CityService : ICityService
     {
@@ -22,6 +22,6 @@ namespace TravelBookingPortal.Application.Services.CityService.Implementation
             return await cityRepository.GetAllCitiesAsync();
         }
 
-        
+
     }
 }

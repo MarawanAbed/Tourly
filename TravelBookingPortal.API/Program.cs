@@ -1,14 +1,8 @@
-
-
-using Restaurants.Application.Extensions;
-
-using Restaurants.Infrastructure.Extensions;
-
 using TravelBookingPortal.Infrastructure.Hubs;
-using TravelBookingPortal.Infrastructure.Seeder;
 
 using TravelBookingPortal.Application.Extensions;
 using TravelBookingPortal.Infrastructure.Seeder.Travel;
+using TravelBookingPortal.Infrastructure.Extensions;
 
 
 namespace TravelBookingPortal.API

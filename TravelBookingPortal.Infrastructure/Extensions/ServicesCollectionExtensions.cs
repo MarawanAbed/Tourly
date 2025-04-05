@@ -11,9 +11,7 @@ using TravelBookingPortal.Domain.Enitites.User;
 using TravelBookingPortal.Domain.Repositories.CityRepo;
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.CityRepo;
-using TravelBookingPortal.Infrastructure.Seeder;
 using TravelBookingPortal.Domain.Repositories.Auth;
-using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.Auth;
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
@@ -26,11 +24,11 @@ using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Seeder.Users;
 
 
-namespace Restaurants.Infrastructure.Extensions
+namespace TravelBookingPortal.Infrastructure.Extensions
 {
-    public static  class ServicesCollectionExtensions
+    public static class ServicesCollectionExtensions
     {
-        public static void AddInfrastructure(this IServiceCollection services,IConfiguration configuration)
+        public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<TravelBookingPortalDbContext>(options =>
             {
@@ -85,7 +83,7 @@ namespace Restaurants.Infrastructure.Extensions
 
             // Add SignalR 
             services.AddSignalR();
-            
+
 
         }
 

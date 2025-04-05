@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TravelBookingPortal.Application.CityLogic.Dtos;
 using TravelBookingPortal.Application.CityLogic.Queries.Models;
-using TravelBookingPortal.Application.Services.CityService.Abstraction;
 
 namespace TravelBookingPortal.API.Controllers.CityController
 {
