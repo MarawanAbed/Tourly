@@ -2,7 +2,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Restaurants.Application.Extensions
+namespace TravelBookingPortal.Application.Extensions
 {
     public static class ServicesCollectionExtensions
     {
@@ -10,11 +10,11 @@ namespace Restaurants.Application.Extensions
         {
             var applicationAssembly = typeof(ServicesCollectionExtensions).Assembly;
             //services.AddScoped<IRestaurantsServices, RestaurantsServices>();
-            services.AddAutoMapper(applicationAssembly);
+            //services.AddAutoMapper(applicationAssembly);
             //like that we tell automapper to scan all the assemblies in the solution
             services.AddValidatorsFromAssembly(applicationAssembly)
                 .AddFluentValidationAutoValidation();
-            services.AddMediatR(cfg=>cfg.RegisterServicesFromAssembly(applicationAssembly));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
         }
     }
 }

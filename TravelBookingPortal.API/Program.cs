@@ -1,5 +1,5 @@
-
 using Restaurants.Infrastructure.Extensions;
+using TravelBookingPortal.Application.Extensions;
 using TravelBookingPortal.Infrastructure.Seeder;
 
 namespace TravelBookingPortal.API
@@ -12,7 +12,7 @@ namespace TravelBookingPortal.API
 
             //add infrastructure
             builder.Services.AddInfrastructure(builder.Configuration);
-
+            builder.Services.AddApplication();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
