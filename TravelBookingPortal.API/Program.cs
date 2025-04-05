@@ -13,7 +13,7 @@ namespace TravelBookingPortal.API
 
             //add infrastructure
             builder.Services.AddInfrastructure(builder.Configuration);
-
+            //add controllers
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
