@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,11 @@ using TravelBookingPortal.Infrastructure.Seeder.Reviews;
 using TravelBookingPortal.Infrastructure.Seeder.Roles;
 using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Seeder.Users;
+using TravelBookingPortal.Domain.Repositories.RoomRepo;
+using TravelBookingPortal.Infrastructure.Repositories.RoomRepo;
+
+using TravelBookingPortal.Infrastructure.Hubs;
+using TravelBookingPortal.Domain.IHubs;
 
 
 namespace TravelBookingPortal.Infrastructure.Extensions
@@ -80,6 +86,8 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<IReviewSeeder, ReviewSeeder>();
             services.AddScoped<ICitySeeder, CitySeeder>();
             services.AddTransient<ICityRepository, CityRepository>();
+            services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IBookingHub, BookingHub>();
 
             // Add SignalR 
             services.AddSignalR();
