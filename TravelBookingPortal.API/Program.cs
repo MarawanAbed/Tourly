@@ -1,6 +1,6 @@
 using Restaurants.Infrastructure.Extensions;
 using TravelBookingPortal.Application.Extensions;
-using TravelBookingPortal.Infrastructure.Seeder;
+using TravelBookingPortal.Infrastructure.Seeder.Travel;
 
 namespace TravelBookingPortal.API
 {

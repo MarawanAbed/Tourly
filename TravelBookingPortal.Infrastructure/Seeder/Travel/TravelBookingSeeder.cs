@@ -1,5 +1,4 @@
-﻿
-using TravelBookingPortal.Infrastructure.DbContext;
+﻿using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
@@ -9,7 +8,7 @@ using TravelBookingPortal.Infrastructure.Seeder.Reviews;
 using TravelBookingPortal.Infrastructure.Seeder.Roles;
 using TravelBookingPortal.Infrastructure.Seeder.Users;
 
-namespace TravelBookingPortal.Infrastructure.Seeder
+namespace TravelBookingPortal.Infrastructure.Seeder.Travel
 {
     public class TravelBookingSeeder(
         TravelBookingPortalDbContext dbContext,

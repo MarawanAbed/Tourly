@@ -11,7 +11,6 @@ using TravelBookingPortal.Domain.Enitites.User;
 using TravelBookingPortal.Domain.Repositories.Auth;
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.Auth;
-using TravelBookingPortal.Infrastructure.Seeder;
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
@@ -19,6 +18,7 @@ using TravelBookingPortal.Infrastructure.Seeder.ItinerariesAndItems;
 using TravelBookingPortal.Infrastructure.Seeder.Preferences;
 using TravelBookingPortal.Infrastructure.Seeder.Reviews;
 using TravelBookingPortal.Infrastructure.Seeder.Roles;
+using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Seeder.Users;
 
 
