@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TravelBookingPortal.Domain.Enitites.User;
+using TravelBookingPortal.Domain.Repositories.CityRepo;
 using TravelBookingPortal.Infrastructure.DbContext;
+using TravelBookingPortal.Infrastructure.Repositories.CityRepo;
 using TravelBookingPortal.Infrastructure.Seeder;
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
@@ -42,6 +44,7 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IItineraryAndItemsSeeder, ItineraryAndItemsSeeder>();
             services.AddScoped<IReviewSeeder, ReviewSeeder>();
             services.AddScoped<ICitySeeder, CitySeeder>();
+            services.AddTransient<ICityRepository, CityRepository>();
 
         }
 

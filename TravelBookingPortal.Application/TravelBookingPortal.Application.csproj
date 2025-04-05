@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Room\**" />
+    <EmbeddedResource Remove="Room\**" />
+    <None Remove="Room\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TravelBookingPortal.Domain\TravelBookingPortal.Domain.csproj" />
   </ItemGroup>
 	<ItemGroup>
