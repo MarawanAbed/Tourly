@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using TravelBookingPortal.Application.Services.CityService.Abstraction;
+using TravelBookingPortal.Application.Services.CityService.Implementation;
 
 namespace TravelBookingPortal.Application.Extensions
 {
@@ -14,6 +16,8 @@ namespace TravelBookingPortal.Application.Extensions
             //like that we tell automapper to scan all the assemblies in the solution
             services.AddValidatorsFromAssembly(applicationAssembly)
                 .AddFluentValidationAutoValidation();
+            services.AddTransient<ICityService, CityService>();
+
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
         }
     }

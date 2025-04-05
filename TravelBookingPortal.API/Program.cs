@@ -1,3 +1,7 @@
+
+
+using Restaurants.Application.Extensions;
+
 using Restaurants.Infrastructure.Extensions;
 
 using TravelBookingPortal.Infrastructure.Hubs;
@@ -17,14 +21,17 @@ namespace TravelBookingPortal.API
 
             //add infrastructure
             builder.Services.AddInfrastructure(builder.Configuration);
+
            
 
             builder.Services.AddApplication();
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
 
             var app = builder.Build();
             //Mapping HuBs

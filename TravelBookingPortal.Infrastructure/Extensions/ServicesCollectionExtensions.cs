@@ -8,6 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TravelBookingPortal.Domain.Enitites.User;
+using TravelBookingPortal.Domain.Repositories.CityRepo;
+using TravelBookingPortal.Infrastructure.DbContext;
+using TravelBookingPortal.Infrastructure.Repositories.CityRepo;
+using TravelBookingPortal.Infrastructure.Seeder;
 using TravelBookingPortal.Domain.Repositories.Auth;
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.Auth;
@@ -77,6 +81,8 @@ namespace Restaurants.Infrastructure.Extensions
             services.AddScoped<IItineraryAndItemsSeeder, ItineraryAndItemsSeeder>();
             services.AddScoped<IReviewSeeder, ReviewSeeder>();
             services.AddScoped<ICitySeeder, CitySeeder>();
+            services.AddTransient<ICityRepository, CityRepository>();
+
             // Add SignalR 
             services.AddSignalR();
             
