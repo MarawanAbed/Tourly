@@ -1,5 +1,4 @@
-﻿
-namespace TravelBookingPortal.Infrastructure.Seeder
+﻿namespace TravelBookingPortal.Infrastructure.Seeder.Travel
 {
     public interface ITravelBookingSeeder
     {
