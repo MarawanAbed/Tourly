@@ -2,15 +2,16 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
+
 using TravelBookingPortal.Domain.Repositories.ItineraryRepo;
 //using TravelBookingPortal.Infrastructure.Repositories;
-
+using TravelBookingPortal.Application.Payment.Command.Handler;
 using TravelBookingPortal.Application.CityLogic.Queries.CityService.Abstraction;
 using TravelBookingPortal.Application.CityLogic.Queries.CityService.Implementation;
 using TravelBookingPortal.Application.RoomLogic.Commands.RoomService.Abstraction;
 using TravelBookingPortal.Application.RoomLogic.Commands.RoomService.Implementation;
-using TravelBookingPortal.Application.RoomLogic.Queries.RoomService.Abstraction;
-using TravelBookingPortal.Application.RoomLogic.Queries.RoomService.Implementation;
+
+
 using TravelBookingPortal.Domain.IHubs;
 
 
@@ -26,6 +27,13 @@ namespace TravelBookingPortal.Application.Extensions
 
             services.AddValidatorsFromAssembly(applicationAssembly)
                 .AddFluentValidationAutoValidation();
+
+            
+
+
+
+
+
 
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
@@ -51,6 +59,7 @@ namespace TravelBookingPortal.Application.Extensions
             services.AddTransient<IRoomService, RoomService>();
             services.AddTransient<IRoomServiceCommands, RoomServiceCommands>();
             services.AddHttpContextAccessor();
+
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
 

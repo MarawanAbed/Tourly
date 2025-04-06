@@ -7,26 +7,25 @@ using AutoMapper;
 using MediatR;
 using TravelBookingPortal.Application.RoomLogic.Dtos;
 using TravelBookingPortal.Application.RoomLogic.Queries.Models;
-
 using TravelBookingPortal.Domain.Repositories.RoomRepo;
 
 namespace TravelBookingPortal.Application.RoomLogic.Queries.Handlers
 {
-    class RoomHandlerQuery : IRequestHandler<GetAvailableRoomsListQuery, IEnumerable<GetRoomsDTO>>
+    class GetRoomByIdQueryHandler : IRequestHandler<GetRoomByIdQuery, GetOneRoomDTO>
     {
         private readonly IRoomRepository roomRepository;
         private readonly IMapper mapper;
 
-        public RoomHandlerQuery(IRoomRepository roomRepository,IMapper mapper)
+        public GetRoomByIdQueryHandler(IRoomRepository roomRepository, IMapper mapper)
         {
             this.roomRepository = roomRepository;
             this.mapper = mapper;
         }
-        public async Task<IEnumerable<GetRoomsDTO>> Handle(GetAvailableRoomsListQuery request, CancellationToken cancellationToken)
+        public async Task<GetOneRoomDTO> Handle(GetRoomByIdQuery request, CancellationToken cancellationToken)
         {
-            var roomList =await roomRepository.GetRoomByCityAndAvailabilityAsync(request.City, request.CheckIn, request.CheckOut, request.RoomType);
-            var roomListMapper = mapper.Map<IEnumerable<GetRoomsDTO>>(roomList);
-            return roomListMapper;
+            var room = await roomRepository.GetRoomByIdAsync(request.Id);
+            var roomMapper = mapper.Map<GetOneRoomDTO>(room);
+            return roomMapper;
         }
     }
 }

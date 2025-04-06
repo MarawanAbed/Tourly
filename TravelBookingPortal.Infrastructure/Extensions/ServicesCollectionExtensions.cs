@@ -39,8 +39,16 @@ using TravelBookingPortal.Infrastructure.Repositories.RoomRepo;
 
 using TravelBookingPortal.Infrastructure.Hubs;
 using TravelBookingPortal.Domain.IHubs;
+
+
+
+using TravelBookingPortal.Application.Payment.PaymentService;
+using TravelBookingPortal.Infrastructure.Services;
+using TravelBookingPortal.Domain.Repositories.BookingRepo;
+using TravelBookingPortal.Infrastructure.Repositories.Bookingrepo;
 using TravelBookingPortal.Domain.Repositories.Profile;
 using TravelBookingPortal.Infrastructure.Repositories.Profile;
+
 
 
 namespace TravelBookingPortal.Infrastructure.Extensions
@@ -106,8 +114,14 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<ICitySeeder, CitySeeder>();
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
+
+            services.AddTransient<IBookingHub, BookingHubService>();
+            services.AddHttpClient<IPaymentService, PaymobService>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<INotificationService, NotificationService>();
             services.AddTransient<IBookingHub, BookingHub>();
             services.AddTransient<IProfileRepo, ProfileRepo>();
+
 
             // Add SignalR 
             services.AddSignalR();

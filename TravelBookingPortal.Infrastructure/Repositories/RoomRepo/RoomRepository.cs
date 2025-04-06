@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.EntityFrameworkCore;
 using TravelBookingPortal.Domain.Enitites.BookingEntities;
 using TravelBookingPortal.Domain.Enitites.HotelEntities;
@@ -20,20 +21,28 @@ namespace TravelBookingPortal.Infrastructure.Repositories.RoomRepo
         {
             this._context = _context;
         }
-
-        public async Task AddBookingAsync(Booking booking)
+        public async Task AddBookingAsync(string UserId, int RoomId, DateTime CheckIn,DateTime CheckOut, decimal TotalPrice)
         {
+            Booking booking = new Booking
+            {
+                UserId = UserId,
+                RoomId = RoomId,
+                CheckInDate = CheckIn,
+                CheckOutDate = CheckOut,
+                TotalPrice = TotalPrice,
+                BookingStatus = "Pending",
+                CreatedAt = DateTime.UtcNow
+            };
             await _context.Bookings.AddAsync(booking);
             await _context.SaveChangesAsync();
         }
-
         public async Task<IEnumerable<Room>> GetRoomByCityAndAvailabilityAsync(string city, DateTime checkIn, DateTime checkOut, string roomType)
         {
             return await _context.Rooms
-                .Include(r => r.Hotel)
-                    .ThenInclude(h => h.City)
-                .Where(r =>
-                    r.IsAvailable &&
+            .Include(r => r.Hotel)
+            .ThenInclude(h => h.City)
+            .Where(r =>
+            r.IsAvailable &&
                     r.RoomType.ToLower() == roomType.ToLower() && 
                     r.Hotel.City.Name.ToLower() == city.ToLower() &&
                     !r.Bookings.Any(b =>
@@ -43,5 +52,12 @@ namespace TravelBookingPortal.Infrastructure.Repositories.RoomRepo
                 .ToListAsync();
         }
 
+        public async Task<Room> GetRoomByIdAsync(int roomId)
+        {
+           return await _context.Rooms
+                .Include(r => r.Hotel)
+                .ThenInclude(h => h.City)
+                .FirstOrDefaultAsync(r => r.RoomId == roomId);
+        }
     }
 }
