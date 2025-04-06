@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using TravelBookingPortal.Application.UserProfile.Dtos;
-using TravelBookingPortal.Domain.Repositories.Profile;
+using TravelBookingPortal.Domain.Repositories.UserProfile;
 
 namespace TravelBookingPortal.Application.UserProfile.Queries
 {

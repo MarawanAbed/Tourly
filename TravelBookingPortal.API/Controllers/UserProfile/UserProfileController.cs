@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.UserProfile.Commands;
 using TravelBookingPortal.Application.UserProfile.Queries;
-using TravelBookingPortal.Domain.Enitites.User;
 
-namespace TravelBookingPortal.API.Controllers.User
+namespace TravelBookingPortal.API.Controllers.UserProfile
 {
     public class UserProfileController : Controller
     {
@@ -30,7 +28,7 @@ namespace TravelBookingPortal.API.Controllers.User
         public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileCommand command)
         {
 
-            
+
             var result = await _mediator.Send(command);
             if (!result)
             {

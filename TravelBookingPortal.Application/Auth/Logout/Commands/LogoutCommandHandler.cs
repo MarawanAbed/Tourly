@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using TravelBookingPortal.Domain.Repositories.Auth;
+using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
 
 namespace TravelBookingPortal.Application.Auth.logout.Commands
 {
-    public class LogoutCommandHandler(ILogoutRepoistory logoutRepoistory) : IRequestHandler<LogoutCommand>
+    public class LogoutCommandHandler(ILogoutRepository logoutRepoistory) : IRequestHandler<LogoutCommand>
     {
         async Task  IRequestHandler<LogoutCommand>.Handle(LogoutCommand request, CancellationToken cancellationToken)
         {

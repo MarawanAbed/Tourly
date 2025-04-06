@@ -1,6 +1,6 @@
 ﻿using TravelBookingPortal.Domain.Enitites.User;
 
-namespace TravelBookingPortal.Infrastructure.Repositories.Auth
+namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
 {
     public interface IGenerateToken
     {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using MediatR;
-using Microsoft.AspNetCore.SignalR;
+
 
 using TravelBookingPortal.Application.RoomLogic.Commands.Models;
 
-using TravelBookingPortal.Domain.Enitites.BookingEntities;
 using TravelBookingPortal.Domain.IHubs;
 using TravelBookingPortal.Domain.Repositories.RoomRepo;
 

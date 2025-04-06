@@ -1,9 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using TravelBookingPortal.Application.Payment.Command.Model;
-using TravelBookingPortal.Infrastructure.Hubs;
 
 namespace TravelBookingPortal.API.Controllers.PaymentController
 {

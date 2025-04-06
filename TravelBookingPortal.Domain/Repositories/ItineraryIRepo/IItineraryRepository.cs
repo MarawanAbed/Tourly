@@ -1,6 +1,6 @@
 ﻿using TravelBookingPortal.Domain.Enitites.ItineraryEntities;
 
-namespace TravelBookingPortal.Domain.Repositories.ItineraryRepo
+namespace TravelBookingPortal.Domain.Repositories.ItineraryIRepo
 {
     public interface IItineraryRepository
     {

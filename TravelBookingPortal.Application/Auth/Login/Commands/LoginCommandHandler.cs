@@ -2,7 +2,7 @@
 
 using MediatR;
 using TravelBookingPortal.Application.Auth.Login.Response;
-using TravelBookingPortal.Domain.Repositories.Auth;
+using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
 namespace TravelBookingPortal.Application.Auth.Login.Commands
 {

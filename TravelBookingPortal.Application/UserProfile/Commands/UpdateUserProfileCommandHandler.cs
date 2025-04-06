@@ -2,17 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+
 using TravelBookingPortal.Application.UserProfile.Dtos;
 using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
 using TravelBookingPortal.Domain.Enitites.User;
-using TravelBookingPortal.Domain.Repositories.Profile;
+using TravelBookingPortal.Domain.Repositories.UserProfile;
 
 namespace TravelBookingPortal.Application.UserProfile.Commands
 {

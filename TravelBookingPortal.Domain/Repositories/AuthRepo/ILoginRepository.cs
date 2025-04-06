@@ -1,4 +1,4 @@
-﻿namespace TravelBookingPortal.Domain.Repositories.Auth
+﻿namespace TravelBookingPortal.Domain.Repositories.AuthRepo
 {
     public interface ILoginRepository
     {

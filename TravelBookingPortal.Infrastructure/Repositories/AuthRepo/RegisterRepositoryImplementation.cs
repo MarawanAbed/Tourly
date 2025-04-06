@@ -1,12 +1,11 @@
 ﻿
 
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using TravelBookingPortal.Domain.Enitites.User;
-using TravelBookingPortal.Domain.Repositories.Auth;
+using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
-namespace TravelBookingPortal.Infrastructure.Repositories.Auth
+namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
 {
     public class RegisterRepositoryImplementation(
         UserManager<ApplicationUser> userManager, ILogger<RegisterRepositoryImplementation> logger,

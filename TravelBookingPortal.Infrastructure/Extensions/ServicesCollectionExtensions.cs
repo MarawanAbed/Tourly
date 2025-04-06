@@ -1,30 +1,16 @@
 
 using Microsoft.AspNetCore.Identity;
-
-
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
-using Microsoft.AspNetCore.Identity;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TravelBookingPortal.Domain.Enitites.User;
-
-using TravelBookingPortal.Domain.Repositories.ItineraryRepo;
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.Itinerary;
-using TravelBookingPortal.Infrastructure.Seeder;
-
 using TravelBookingPortal.Domain.Repositories.CityRepo;
-using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.CityRepo;
-using TravelBookingPortal.Domain.Repositories.Auth;
-using TravelBookingPortal.Infrastructure.Repositories.Auth;
-
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
@@ -36,18 +22,17 @@ using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Seeder.Users;
 using TravelBookingPortal.Domain.Repositories.RoomRepo;
 using TravelBookingPortal.Infrastructure.Repositories.RoomRepo;
-
-using TravelBookingPortal.Infrastructure.Hubs;
-using TravelBookingPortal.Domain.IHubs;
-
-
-
 using TravelBookingPortal.Application.Payment.PaymentService;
 using TravelBookingPortal.Infrastructure.Services;
 using TravelBookingPortal.Domain.Repositories.BookingRepo;
 using TravelBookingPortal.Infrastructure.Repositories.Bookingrepo;
-using TravelBookingPortal.Domain.Repositories.Profile;
 using TravelBookingPortal.Infrastructure.Repositories.Profile;
+using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
+using TravelBookingPortal.Domain.Repositories.UserProfile;
+using TravelBookingPortal.Infrastructure.Repositories.AuthRepo;
+using TravelBookingPortal.Domain.Repositories.AuthRepo;
+using TravelBookingPortal.Domain.IHubs;
+using TravelBookingPortal.Infrastructure.Hubs;
 
 
 
@@ -102,7 +87,7 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<IGenerateToken, GenerateToken>();
             services.AddScoped<IRegisterRepoistory, RegisterRepositoryImplementation>();
             services.AddScoped<ILoginRepository, LoginRepositoryImplementation>();
-            services.AddScoped<ILogoutRepoistory, LogoutRepositoryImplementation>();
+            services.AddScoped<ILogoutRepository, LogoutRepositoryImplementation>();
             services.AddScoped<ITravelBookingSeeder, TravelBookingSeeder>();
             services.AddScoped<IRoleSeeder, RoleSeeder>();
             services.AddScoped<IUserSeeder, UserSeeder>();
@@ -114,12 +99,11 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<ICitySeeder, CitySeeder>();
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
-
-            services.AddTransient<IBookingHub, BookingHubService>();
+            
             services.AddHttpClient<IPaymentService, PaymobService>();
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<INotificationService, NotificationService>();
-            services.AddTransient<IBookingHub, BookingHub>();
+            services.AddTransient<IBookingHub, BookingHubService>();
             services.AddTransient<IProfileRepo, ProfileRepo>();
 
 
@@ -127,17 +111,7 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddSignalR();
 
 
-            services.AddLogging();
-            services.AddMemoryCache();
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
-                });
-            });
+
         }
 
 

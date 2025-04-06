@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.RoomLogic.Commands.Models;
-using TravelBookingPortal.Application.RoomLogic.Dtos;
 using TravelBookingPortal.Application.RoomLogic.Queries.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TravelBookingPortal.API.Controllers.RoomController
 {

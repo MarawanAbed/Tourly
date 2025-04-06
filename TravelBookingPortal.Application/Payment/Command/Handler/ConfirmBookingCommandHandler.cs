@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using MediatR;
-using Microsoft.AspNetCore.SignalR;
 using TravelBookingPortal.Application.Payment.Command.Model;
 using TravelBookingPortal.Domain.IHubs;
 using TravelBookingPortal.Domain.Repositories.BookingRepo;
-using TravelBookingPortal.Domain.Repositories.RoomRepo;
 
 namespace TravelBookingPortal.Application.Payment.Command.Handler
 {

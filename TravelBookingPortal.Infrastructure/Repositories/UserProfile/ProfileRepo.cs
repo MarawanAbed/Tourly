@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
 using TravelBookingPortal.Domain.Enitites.User;
-using TravelBookingPortal.Domain.Repositories.Profile;
+using TravelBookingPortal.Domain.Repositories.UserProfile;
 using TravelBookingPortal.Infrastructure.DbContext;
 
 namespace TravelBookingPortal.Infrastructure.Repositories.Profile

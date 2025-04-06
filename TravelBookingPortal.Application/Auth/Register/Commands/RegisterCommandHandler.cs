@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using TravelBookingPortal.Application.Auth.Register.Response;
-using TravelBookingPortal.Domain.Repositories.Auth;
+using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
 namespace TravelBookingPortal.Application.Auth.Register.Commands
 {

@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using TravelBookingPortal.Domain.Enitites.User;
 
-namespace TravelBookingPortal.Infrastructure.Repositories.Auth
+namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
 {
     public class GenerateToken(UserManager<ApplicationUser> userManager, IConfiguration configuration, ILogger<GenerateToken> logger) : IGenerateToken
     {

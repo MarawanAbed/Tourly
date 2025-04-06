@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
+﻿using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
 using TravelBookingPortal.Domain.Enitites.User;
 
-namespace TravelBookingPortal.Domain.Repositories.Profile
+namespace TravelBookingPortal.Domain.Repositories.UserProfile
 {
     public interface IProfileRepo
     {

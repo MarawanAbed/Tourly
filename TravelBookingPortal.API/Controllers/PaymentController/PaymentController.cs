@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.Payment.DTOS;
 using TravelBookingPortal.Application.Payment.PaymentService;
+
 
 namespace TravelBookingPortal.API.Controllers.PaymentController
 {
