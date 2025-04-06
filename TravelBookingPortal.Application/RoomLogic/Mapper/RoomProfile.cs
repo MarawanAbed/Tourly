@@ -13,6 +13,7 @@ namespace TravelBookingPortal.Application.RoomLogic.Mapper
         {
             GetAvailableRoomListMapper();
             BookingRoomMapper();
+            GetRoomByIdMapper();
         }
     }
 }

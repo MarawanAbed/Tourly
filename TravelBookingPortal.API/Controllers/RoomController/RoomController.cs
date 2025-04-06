@@ -8,7 +8,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TravelBookingPortal.API.Controllers.RoomController
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RoomController : ControllerBase
     {
@@ -17,7 +17,7 @@ namespace TravelBookingPortal.API.Controllers.RoomController
         {
             _mediator = mediator;
         }
-        [HttpGet]
+        [HttpGet("GetAvailableRooms")]
         public async Task<IActionResult> GetAvailableRooms([FromQuery]GetAvailableRoomsListQuery request)
         {
             var rooms = await _mediator.Send(request);
@@ -29,5 +29,17 @@ namespace TravelBookingPortal.API.Controllers.RoomController
              await _mediator.Send(book);
              return Ok();
         }
+        [HttpGet("GetRoomById/{id}")]
+        public async Task<IActionResult> GetRoomById(int id)
+        {
+            var room = await _mediator.Send(new GetRoomByIdQuery { Id = id });
+            if (room == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(room);
+        }
+
     }
 }
