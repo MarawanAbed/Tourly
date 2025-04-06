@@ -25,7 +25,20 @@ namespace TravelBookingPortal.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            
+
+            var myPolicy = "myPolicy";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: myPolicy, policy =>
+                {
+                    policy
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
 
             var app = builder.Build();
             //Mapping HuBs
@@ -43,6 +56,7 @@ namespace TravelBookingPortal.API
 
             app.UseAuthorization();
 
+            app.UseCors(myPolicy);
 
             app.MapControllers();
 
