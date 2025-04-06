@@ -60,8 +60,8 @@ namespace TravelBookingPortal.API
                 app.UseSwaggerUI();
             }
 
-
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

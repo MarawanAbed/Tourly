@@ -39,6 +39,8 @@ using TravelBookingPortal.Infrastructure.Repositories.RoomRepo;
 
 using TravelBookingPortal.Infrastructure.Hubs;
 using TravelBookingPortal.Domain.IHubs;
+using TravelBookingPortal.Domain.Repositories.Profile;
+using TravelBookingPortal.Infrastructure.Repositories.Profile;
 
 
 namespace TravelBookingPortal.Infrastructure.Extensions
@@ -105,6 +107,7 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
             services.AddTransient<IBookingHub, BookingHub>();
+            services.AddTransient<IProfileRepo, ProfileRepo>();
 
             // Add SignalR 
             services.AddSignalR();

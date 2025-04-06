@@ -50,6 +50,7 @@ namespace TravelBookingPortal.Application.Extensions
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IRoomService, RoomService>();
             services.AddTransient<IRoomServiceCommands, RoomServiceCommands>();
+            services.AddHttpContextAccessor();
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
 
