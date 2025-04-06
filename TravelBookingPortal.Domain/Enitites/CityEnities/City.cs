@@ -11,6 +11,6 @@ namespace TravelBookingPortal.Domain.Enitites.CityEnities
         public string ImageUrl { get; set; }
 
 
-        public List<Hotel> Hotels { get; set; } = new List<Hotel>();
+        public List<Hotel>? Hotels { get; set; } = new List<Hotel>();
     }
 }

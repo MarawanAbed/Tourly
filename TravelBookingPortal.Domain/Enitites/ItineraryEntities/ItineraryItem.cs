@@ -7,6 +7,6 @@
         public string Description { get; set; }
         public DateTime? DateTime { get; set; }
 
-        public Itinerary Itinerary { get; set; }
+        public Itinerary? Itinerary { get; set; }
     }
 }

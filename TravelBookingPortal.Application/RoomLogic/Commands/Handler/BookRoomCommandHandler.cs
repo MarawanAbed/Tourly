@@ -28,7 +28,7 @@ namespace TravelBookingPortal.Application.RoomLogic.Commands.Handler
             await roomService.BookRoomAsync(request.UserId, request.RoomId, request.CheckIn, request.CheckOut,request.TotalPrice);
 
 
-            await _bookingHub.SendBookingUpdate("Pending");
+            //await _bookingHub.SendBookingUpdate("Pending");
 
             
         }

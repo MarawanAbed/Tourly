@@ -11,7 +11,7 @@ namespace TravelBookingPortal.Domain.Enitites.ItineraryEntities
         public DateTime EndDate { get; set; }
         public string? Notes { get; set; }
 
-        public ApplicationUser User { get; set; }
-        public List<ItineraryItem> Items { get; set; }
+        public ApplicationUser? User { get; set; }
+        public List<ItineraryItem>? Items { get; set; }
     }
 }
