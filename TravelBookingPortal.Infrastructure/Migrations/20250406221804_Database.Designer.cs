@@ -12,8 +12,8 @@ using TravelBookingPortal.Infrastructure.DbContext;
 namespace TravelBookingPortal.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelBookingPortalDbContext))]
-    [Migration("20250406015524_ChangeNullable")]
-    partial class ChangeNullable
+    [Migration("20250406221804_Database")]
+    partial class Database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
