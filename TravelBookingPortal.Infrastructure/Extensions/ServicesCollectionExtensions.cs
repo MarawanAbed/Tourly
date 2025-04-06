@@ -1,19 +1,30 @@
-﻿
+
+using Microsoft.AspNetCore.Identity;
+
+
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 using Microsoft.AspNetCore.Identity;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TravelBookingPortal.Domain.Enitites.User;
+
+using TravelBookingPortal.Domain.Repositories.ItineraryRepo;
+using TravelBookingPortal.Infrastructure.DbContext;
+using TravelBookingPortal.Infrastructure.Repositories.Itinerary;
+using TravelBookingPortal.Infrastructure.Seeder;
+
 using TravelBookingPortal.Domain.Repositories.CityRepo;
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.CityRepo;
 using TravelBookingPortal.Domain.Repositories.Auth;
 using TravelBookingPortal.Infrastructure.Repositories.Auth;
+
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
@@ -28,13 +39,20 @@ using TravelBookingPortal.Infrastructure.Repositories.RoomRepo;
 
 using TravelBookingPortal.Infrastructure.Hubs;
 using TravelBookingPortal.Domain.IHubs;
+
+
+
 using TravelBookingPortal.Application.Payment.PaymentService;
 using TravelBookingPortal.Infrastructure.Services;
 using TravelBookingPortal.Domain.Repositories.BookingRepo;
 using TravelBookingPortal.Infrastructure.Repositories.Bookingrepo;
+using TravelBookingPortal.Domain.Repositories.Profile;
+using TravelBookingPortal.Infrastructure.Repositories.Profile;
+
 
 
 namespace TravelBookingPortal.Infrastructure.Extensions
+
 {
     public static class ServicesCollectionExtensions
     {
@@ -46,9 +64,14 @@ namespace TravelBookingPortal.Infrastructure.Extensions
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<TravelBookingPortalDbContext>()
                 .AddDefaultTokenProviders();
+
+
+            services.AddScoped<IItineraryRepository, ItineraryRepositoryImplementation>();
+
 
             services.AddAuthentication(options =>
             {
@@ -91,16 +114,30 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<ICitySeeder, CitySeeder>();
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
+
             services.AddTransient<IBookingHub, BookingHubService>();
             services.AddHttpClient<IPaymentService, PaymobService>();
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddTransient<IBookingHub, BookingHub>();
+            services.AddTransient<IProfileRepo, ProfileRepo>();
 
 
             // Add SignalR 
             services.AddSignalR();
 
 
+            services.AddLogging();
+            services.AddMemoryCache();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
         }
 
 
