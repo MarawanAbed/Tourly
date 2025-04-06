@@ -30,6 +30,10 @@ namespace TravelBookingPortal.Infrastructure.Seeder.Users
                         UserName = userData.Email,
                         Email = userData.Email,
                         FirstName = userData.FirstName,
+                        PhoneNumber = "1234567890",
+                        State = "State",
+                        City = "City",
+                        Street="street",
                         LastName = userData.LastName,
                         ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png",
                         CreatedAt = DateTime.UtcNow
