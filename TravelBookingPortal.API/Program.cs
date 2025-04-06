@@ -1,3 +1,8 @@
+
+using Restaurants.Application.Extensions;
+using Restaurants.Infrastructure.Extensions;
+using TravelBookingPortal.Infrastructure.Seeder;
+
 using TravelBookingPortal.Infrastructure.Hubs;
 
 using TravelBookingPortal.Application.Extensions;
@@ -12,9 +17,8 @@ namespace TravelBookingPortal.API
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            //add infrastructure
             builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddApplication();
 
            
 
@@ -22,9 +26,27 @@ namespace TravelBookingPortal.API
 
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
+            var app = builder.Build();
+
+            if (app.Environment.IsDevelopment())
+            {
+                var scope = app.Services.CreateScope();
+                await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
+            }
+
 
             var myPolicy = "myPolicy";
 
@@ -46,17 +68,22 @@ namespace TravelBookingPortal.API
             var scope = app.Services.CreateScope();
             await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
             // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors();
 
+            app.UseHttpsRedirection();
             app.UseAuthorization();
 
+
+
             app.UseCors(myPolicy);
+
 
             app.MapControllers();
 
