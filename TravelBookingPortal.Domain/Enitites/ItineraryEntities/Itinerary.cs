@@ -1,5 +1,5 @@
 ﻿using TravelBookingPortal.Domain.Enitites.User;
-
+using TravelBookingPortal.Domain.Enitites;
 namespace TravelBookingPortal.Domain.Enitites.ItineraryEntities
 {
     public class Itinerary
