@@ -40,7 +40,7 @@ namespace TravelBookingPortal.API
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
