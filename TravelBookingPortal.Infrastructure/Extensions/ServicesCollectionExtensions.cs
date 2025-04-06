@@ -41,9 +41,6 @@ using TravelBookingPortal.Infrastructure.Hubs;
 using TravelBookingPortal.Domain.IHubs;
 
 
-namespace Restaurants.Infrastructure.Extensions
-
-
 namespace TravelBookingPortal.Infrastructure.Extensions
 
 {

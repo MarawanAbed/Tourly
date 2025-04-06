@@ -1,7 +1,4 @@
 
-using Restaurants.Application.Extensions;
-using Restaurants.Infrastructure.Extensions;
-using TravelBookingPortal.Infrastructure.Seeder;
 
 using TravelBookingPortal.Infrastructure.Hubs;
 
@@ -31,25 +28,7 @@ namespace TravelBookingPortal.API
             builder.Services.AddSwaggerGen();
 
 
-            builder.Services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(policy =>
-                {
-                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-                });
-            });
-
-            var app = builder.Build();
-
-            if (app.Environment.IsDevelopment())
-            {
-                var scope = app.Services.CreateScope();
-                await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
-            }
-
-
             var myPolicy = "myPolicy";
-
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(name: myPolicy, policy =>
@@ -61,8 +40,14 @@ namespace TravelBookingPortal.API
                 });
             });
 
-
             var app = builder.Build();
+
+           
+
+
+           
+
+
             //Mapping HuBs
             app.MapHub<BookingHub>("/bookingHub");
             var scope = app.Services.CreateScope();
@@ -75,7 +60,6 @@ namespace TravelBookingPortal.API
                 app.UseSwaggerUI();
             }
 
-            app.UseCors();
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
