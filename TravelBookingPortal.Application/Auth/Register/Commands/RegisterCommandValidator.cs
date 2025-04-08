@@ -20,6 +20,17 @@ namespace TravelBookingPortal.Application.Auth.Register.Commands
                 .NotEmpty();
             RuleFor(x => x.Image)
                 .NotEmpty();
+            RuleFor(x => x.PhoneNumber)
+                .NotEmpty();
+            RuleFor(x => x.State)
+                .NotEmpty();
+            RuleFor(x => x.DateOfBirth)
+                .NotEmpty()
+                .Must(date => date <= DateTime.UtcNow)
+                .WithMessage("Date of birth must be in the past.");
+            RuleFor(x => x.Street)
+                .NotEmpty();
+
 
         }
     }
