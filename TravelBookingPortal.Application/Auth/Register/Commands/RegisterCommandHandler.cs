@@ -1,20 +1,34 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using TravelBookingPortal.Application.Auth.Register.Response;
 using TravelBookingPortal.Domain.Enitites.User;
 using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
 namespace TravelBookingPortal.Application.Auth.Register.Commands
 {
-    internal class RegisterCommandHandler(IRegisterRepoistory registerRepoistory) : IRequestHandler<RegisterCommand, RegisterResponse>
+    internal class RegisterCommandHandler(IRegisterRepoistory registerRepoistory,UserManager<ApplicationUser> userManager) : IRequestHandler<RegisterCommand, RegisterResponse>
     {
         public async Task<RegisterResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
+
+            var files = request.Image;
+            string imageUrl = null;
+            if (files != null)
+            {
+                var fileName = Guid.NewGuid() + Path.GetExtension(files.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await files.CopyToAsync(stream);
+                }
+                imageUrl = $"/images/{fileName}";
+            }
             var ApplicationUser = new ApplicationUser
             {
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                ImageUrl = request.Image,
+                ImageUrl = imageUrl,
                 PhoneNumber = request.PhoneNumber,
                 State = request.State,
                 City = request.City,
@@ -28,13 +42,16 @@ namespace TravelBookingPortal.Application.Auth.Register.Commands
                 return new RegisterResponse
                 {
                     Success = false,
-                    Token = "null"
+                    Token = "null",
+                    Id=null
+
                 };
             }
             return new RegisterResponse
             {
                 Success = true,
-                Token = result
+                Token = result,
+                Id = userManager.Users.FirstOrDefault(x => x.Email == request.Email)?.Id
             };
         }
     }

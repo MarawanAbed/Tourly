@@ -5,6 +5,7 @@ using TravelBookingPortal.Infrastructure.Hubs;
 using TravelBookingPortal.Application.Extensions;
 using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Extensions;
+using Microsoft.Extensions.FileProviders;
 
 
 namespace TravelBookingPortal.API
@@ -42,18 +43,12 @@ namespace TravelBookingPortal.API
 
             var app = builder.Build();
 
-           
-
-
-           
-
-
             //Mapping HuBs
             app.MapHub<BookingHub>("/bookingHub");
             var scope = app.Services.CreateScope();
             await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
             // Configure the HTTP request pipeline.
-
+            app.UseStaticFiles();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -63,7 +58,6 @@ namespace TravelBookingPortal.API
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-
 
 
             app.UseCors(myPolicy);

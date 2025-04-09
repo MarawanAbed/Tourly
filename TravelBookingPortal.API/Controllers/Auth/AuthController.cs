@@ -12,14 +12,21 @@ namespace TravelBookingPortal.API.Controllers.Auth
     {
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterCommand command)
+        public async Task<IActionResult> Register([FromForm] RegisterCommand command)
         {
-            var result = await mediator.Send(command);
-            if (result.Success)
+            try 
             {
-                return Ok(result);
+                var result = await mediator.Send(command);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result);
             }
-            return BadRequest(result);
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand command)

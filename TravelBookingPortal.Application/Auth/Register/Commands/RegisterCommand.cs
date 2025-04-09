@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using TravelBookingPortal.Application.Auth.Register.Response;
 
 namespace TravelBookingPortal.Application.Auth.Register.Commands
@@ -9,7 +10,7 @@ namespace TravelBookingPortal.Application.Auth.Register.Commands
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
 
         public string PhoneNumber { get; set; }
 
