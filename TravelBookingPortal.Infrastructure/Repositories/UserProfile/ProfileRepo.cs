@@ -22,47 +22,45 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Profile
             {
                 throw new Exception("User not found");
             }
-           
             return user;
         }
 
         public async Task UpdateUserProfileAsync(string UserId   ,string FirstName,
          string LastName ,
-         string ImageUrl,
+         string? ImageUrl,
          string PhoneNumber ,
          string? State,
          string? City ,
          string? Street ,
-        List<Preference> prefrences)
+         string Email,
+         string UserName
+        )
         {
-           var user = await _context.Users.Include(p => p.Preferences).FirstOrDefaultAsync(u => u.Id == UserId);
+            var user = await _context.Users.FirstOrDefaultAsync(p=>p.Id==UserId);
             if (user == null)
             {
                 throw new Exception("User not found");
             }
             user.FirstName = FirstName;
             user.LastName = LastName;
-            user.ImageUrl = ImageUrl;
+            if (ImageUrl != null)
+            {
+                user.ImageUrl = ImageUrl;
+            }
+            user.ImageUrl=user.ImageUrl;
             user.PhoneNumber = PhoneNumber;
             user.State = State;
             user.City = City;
             user.Street = Street;
-
-            var oldprefrences =await _context.UserPreferences.Where(p => p.UserId == UserId).ToListAsync();
-
-             _context.UserPreferences.RemoveRange(oldprefrences);
-            if(prefrences != null && prefrences.Count > 0)
-            {
-                foreach (var preference in prefrences)
-                {
-                    preference.UserId = UserId;
-                    
-                }
-              await _context.UserPreferences.AddRangeAsync(prefrences);
-            }
+            user.Email = Email;
+            user.UserName = UserName;
+            user.CreatedAt=user.CreatedAt;
+            user.DateOfBirth = user.DateOfBirth;
+           
+            
             await _context.SaveChangesAsync();
 
-            
+
         }
     }
 }
