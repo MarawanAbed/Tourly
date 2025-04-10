@@ -16,9 +16,9 @@ namespace TravelBookingPortal.Application.UserProfile.Commands
             RuleFor(x => x.PhoneNumber)
                 .NotEmpty()
                 .WithMessage("Phone number is required.");
-            RuleFor(x => x.ImageUrl)
+            RuleFor(x => x.Image)
                 .NotEmpty()
-                .WithMessage("Image URL is required.");
+                .WithMessage("Image is required.");
             RuleFor(x => x.State)
                 .NotEmpty()
                 .WithMessage("State is required.");
@@ -28,6 +28,16 @@ namespace TravelBookingPortal.Application.UserProfile.Commands
             RuleFor(x => x.Street)
                 .NotEmpty()
                 .WithMessage("Street is required.");
+            RuleFor(x => x.Email)
+                .NotEmpty()
+                .WithMessage("Email is required.")
+                .EmailAddress()
+                .WithMessage("Invalid email format.");
+            RuleFor(x => x.UserName)
+                .NotEmpty()
+                .WithMessage("User name is required.")
+                .MinimumLength(3)
+                .WithMessage("User name must be at least 3 characters long.");
         }
     }
 }

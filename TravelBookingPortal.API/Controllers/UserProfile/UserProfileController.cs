@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.UserProfile.Commands;
 using TravelBookingPortal.Application.UserProfile.Queries;
@@ -24,15 +25,16 @@ namespace TravelBookingPortal.API.Controllers.UserProfile
             }
             return Ok(result);
         }
-        [HttpPut("user")]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileCommand command)
+        [HttpPut("user/{userId}")]
+        public async Task<IActionResult> UpdateUserProfile(string userId, [FromForm] UpdateUserProfileCommand command)
         {
+            command.UserId = userId;
 
 
             var result = await _mediator.Send(command);
             if (!result)
             {
-                return NotFound();
+                return BadRequest(new {error="Failed To Update Profile"});
             }
             return NoContent();
         }

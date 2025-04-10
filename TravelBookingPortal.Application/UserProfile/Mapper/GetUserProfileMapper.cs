@@ -11,7 +11,9 @@ namespace TravelBookingPortal.Application.UserProfile.Mapper
         {
 
             CreateMap<ApplicationUser, UserProfileDto>()
-             .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => src.Preferences));
+             .ForMember(p => p.Email, opt => opt.MapFrom(src=>src.Email))
+             .ForMember(p => p.UserName, opt => opt.MapFrom(src=>src.UserName));
+
             CreateMap<Preference, PreferenceDto>();
             CreateMap<PreferenceDto, Preference>();
         }
