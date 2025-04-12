@@ -39,10 +39,10 @@ namespace TravelBookingPortal.API.Controllers.Auth
             return BadRequest(result);
         }
 
-        [HttpDelete("logout")]
-        public async Task<IActionResult> Logout([FromBody] LogoutCommand command)
+        [HttpDelete("logout/{userId}")]
+        public async Task<IActionResult> Logout(string userId)
         {
-             await mediator.Send(command);
+            await mediator.Send(new LogoutCommand { UserId=userId});
             return Ok(new { message = "Logout successful" });
         }
 

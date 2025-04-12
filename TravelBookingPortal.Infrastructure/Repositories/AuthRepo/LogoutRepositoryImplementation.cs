@@ -8,9 +8,17 @@ namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
 {
     public class LogoutRepositoryImplementation(SignInManager<ApplicationUser> _signInManager) : ILogoutRepository
     {
-        public async Task Logout()
+        public async Task Logout(string userId)
         {
-             await _signInManager.SignOutAsync();
+            var user = await _signInManager.UserManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                await _signInManager.SignOutAsync();
+            }
+            else
+            {
+                throw new Exception("User not found");
+            }
         }
     }
 }

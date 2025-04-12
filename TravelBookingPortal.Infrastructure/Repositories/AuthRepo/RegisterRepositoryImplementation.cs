@@ -28,7 +28,6 @@ namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
                 Street = applicationUser.Street,
                 CreatedAt = DateTime.UtcNow,
             };
-
             var result = await userManager.CreateAsync(user, password);
             if (result.Succeeded)
             {

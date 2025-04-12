@@ -6,9 +6,15 @@ namespace TravelBookingPortal.Application.Auth.logout.Commands
 {
     public class LogoutCommandHandler(ILogoutRepository logoutRepoistory) : IRequestHandler<LogoutCommand>
     {
-        async Task  IRequestHandler<LogoutCommand>.Handle(LogoutCommand request, CancellationToken cancellationToken)
+
+        public async Task Handle(LogoutCommand request, CancellationToken cancellationToken)
         {
-            await logoutRepoistory.Logout();
+            var userId = request.UserId;
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new ArgumentException("User ID cannot be null or empty.", nameof(userId));
+            }
+            await logoutRepoistory.Logout(userId);
         }
     }
 }
