@@ -33,6 +33,17 @@ using TravelBookingPortal.Infrastructure.Repositories.AuthRepo;
 using TravelBookingPortal.Domain.Repositories.AuthRepo;
 using TravelBookingPortal.Domain.IHubs;
 using TravelBookingPortal.Infrastructure.Hubs;
+using TravelBookingPortal.Domain.Repositories.Admin.Booking;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Booking;
+using TravelBookingPortal.Domain.Repositories.Admin.Cities;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Cities;
+using TravelBookingPortal.Domain.Repositories.Admin.Hotels;
+using TravelBookingPortal.Domain.Enitites.HotelEntities;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Hotels;
+using TravelBookingPortal.Domain.Repositories.Admin.Rooms;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Rooms;
+using TravelBookingPortal.Domain.Repositories.Admin.Users;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Users;
 
 
 
@@ -105,6 +116,12 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<INotificationService, NotificationService>();
             services.AddTransient<IBookingHub, BookingHubService>();
             services.AddTransient<IProfileRepo, ProfileRepo>();
+
+            services.AddScoped<IBooking, Booking>();
+            services.AddScoped<ICities, Cities>();
+            services.AddScoped<IHotels, Hotels>();
+            services.AddScoped<IRooms, Rooms>();
+            services.AddScoped<IUsers, Users>();
 
 
             // Add SignalR 
