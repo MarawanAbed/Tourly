@@ -19,6 +19,6 @@ namespace TravelBookingPortal.Domain.Enitites.HotelEntities
 
         public City? City { get; set; }
 
-        public int CityId { get; set; } // Foreign key to City
+        public int CityId { get; set; } 
     }
 }

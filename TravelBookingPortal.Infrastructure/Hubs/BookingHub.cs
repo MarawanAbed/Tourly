@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using TravelBookingPortal.Domain.IHubs;
 
 
 
 namespace TravelBookingPortal.Infrastructure.Hubs
 {
-    public class BookingHub : Hub,IBookingHub
+    public class BookingHub : Hub
     {
-        public async Task SendBookingUpdate(string status)
+        public async Task ConfirmBooking(int bookingId)
         {
-            await Clients.All.SendAsync("ReceiveBookingUpdate",  status);
+            await Clients.All.SendAsync("BookingConfirmed", bookingId);
         }
+
     }
 }

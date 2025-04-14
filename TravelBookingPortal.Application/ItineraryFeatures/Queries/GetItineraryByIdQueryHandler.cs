@@ -1,7 +1,13 @@
 ﻿using MediatR;
 using TravelBookingPortal.Application.ItineraryFeatures.Dtos;
+
 using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
 using System.Linq;
+
+using System.Threading;
+using System.Threading.Tasks;
+using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
+
 
 namespace TravelBookingPortal.Application.ItineraryFeatures.Queries
 {

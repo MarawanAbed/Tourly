@@ -1,30 +1,16 @@
 
 using Microsoft.AspNetCore.Identity;
-
-
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
-using Microsoft.AspNetCore.Identity;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TravelBookingPortal.Domain.Enitites.User;
-
-using TravelBookingPortal.Domain.Repositories.ItineraryRepo;
 using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.Itinerary;
-using TravelBookingPortal.Infrastructure.Seeder;
-
 using TravelBookingPortal.Domain.Repositories.CityRepo;
-using TravelBookingPortal.Infrastructure.DbContext;
 using TravelBookingPortal.Infrastructure.Repositories.CityRepo;
-using TravelBookingPortal.Domain.Repositories.Auth;
-using TravelBookingPortal.Infrastructure.Repositories.Auth;
-
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
@@ -36,12 +22,29 @@ using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Seeder.Users;
 using TravelBookingPortal.Domain.Repositories.RoomRepo;
 using TravelBookingPortal.Infrastructure.Repositories.RoomRepo;
-
-using TravelBookingPortal.Infrastructure.Hubs;
+using TravelBookingPortal.Application.Payment.PaymentService;
+using TravelBookingPortal.Infrastructure.Services;
+using TravelBookingPortal.Domain.Repositories.BookingRepo;
+using TravelBookingPortal.Infrastructure.Repositories.Bookingrepo;
+using TravelBookingPortal.Infrastructure.Repositories.Profile;
+using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
+using TravelBookingPortal.Domain.Repositories.UserProfile;
+using TravelBookingPortal.Infrastructure.Repositories.AuthRepo;
+using TravelBookingPortal.Domain.Repositories.AuthRepo;
 using TravelBookingPortal.Domain.IHubs;
+using TravelBookingPortal.Infrastructure.Hubs;
+using TravelBookingPortal.Domain.Repositories.Admin.Booking;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Booking;
+using TravelBookingPortal.Domain.Repositories.Admin.Cities;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Cities;
+using TravelBookingPortal.Domain.Repositories.Admin.Hotels;
+using TravelBookingPortal.Domain.Enitites.HotelEntities;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Hotels;
+using TravelBookingPortal.Domain.Repositories.Admin.Rooms;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Rooms;
+using TravelBookingPortal.Domain.Repositories.Admin.Users;
+using TravelBookingPortal.Infrastructure.Repositories.Admin.Users;
 
-
-namespace Restaurants.Infrastructure.Extensions
 
 
 namespace TravelBookingPortal.Infrastructure.Extensions
@@ -95,7 +98,7 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<IGenerateToken, GenerateToken>();
             services.AddScoped<IRegisterRepoistory, RegisterRepositoryImplementation>();
             services.AddScoped<ILoginRepository, LoginRepositoryImplementation>();
-            services.AddScoped<ILogoutRepoistory, LogoutRepositoryImplementation>();
+            services.AddScoped<ILogoutRepository, LogoutRepositoryImplementation>();
             services.AddScoped<ITravelBookingSeeder, TravelBookingSeeder>();
             services.AddScoped<IRoleSeeder, RoleSeeder>();
             services.AddScoped<IUserSeeder, UserSeeder>();
@@ -107,23 +110,25 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<ICitySeeder, CitySeeder>();
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
-            services.AddTransient<IBookingHub, BookingHub>();
+            
+            services.AddHttpClient<IPaymentService, PaymobService>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddTransient<IBookingHub, BookingHubService>();
+            services.AddTransient<IProfileRepo, ProfileRepo>();
+
+            services.AddScoped<IBooking, Booking>();
+            services.AddScoped<ICities, Cities>();
+            services.AddScoped<IHotels, Hotels>();
+            services.AddScoped<IRooms, Rooms>();
+            services.AddScoped<IUsers, Users>();
+
 
             // Add SignalR 
             services.AddSignalR();
 
 
-            services.AddLogging();
-            services.AddMemoryCache();
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
-                });
-            });
+
         }
 
 

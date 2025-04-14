@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using TravelBookingPortal.Domain.Enitites.ItineraryEntities;
-using TravelBookingPortal.Domain.Repositories.ItineraryRepo;
-
+using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
 
 namespace TravelBookingPortal.Application.ItineraryFeatures.Commands
 {
