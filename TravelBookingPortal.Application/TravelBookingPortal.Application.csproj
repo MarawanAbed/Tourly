@@ -15,4 +15,8 @@
 		<PackageReference Include="MediatR" Version="12.5.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Reviews\Mapper\" />
+	  <Folder Include="Reviews\Queries\" />
+	</ItemGroup>
 </Project>
