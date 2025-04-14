@@ -10,6 +10,6 @@ namespace TravelBookingPortal.Domain.Enitites.PreferenceEnitites
         public string PreferenceType { get; set; }
         public string PreferenceValue { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
     }
 }

@@ -1,6 +1,14 @@
+
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using TravelBookingPortal.Infrastructure.Seeder;
+
+using TravelBookingPortal.Infrastructure.Hubs;
+
+using TravelBookingPortal.Application.Extensions;
+using TravelBookingPortal.Infrastructure.Seeder.Travel;
+using TravelBookingPortal.Infrastructure.Extensions;
+
 
 namespace TravelBookingPortal.API
 {
@@ -12,10 +20,16 @@ namespace TravelBookingPortal.API
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
 
+           
+
+            builder.Services.AddApplication();
+
+
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
 
             builder.Services.AddCors(options =>
             {
@@ -33,6 +47,28 @@ namespace TravelBookingPortal.API
                 await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
             }
 
+
+            var myPolicy = "myPolicy";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: myPolicy, policy =>
+                {
+                    policy
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
+
+            var app = builder.Build();
+            //Mapping HuBs
+            app.MapHub<BookingHub>("/bookingHub");
+            var scope = app.Services.CreateScope();
+            await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
+            // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -43,6 +79,11 @@ namespace TravelBookingPortal.API
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
+
+
+
+            app.UseCors(myPolicy);
+
 
             app.MapControllers();
 

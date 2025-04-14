@@ -13,7 +13,7 @@ namespace TravelBookingPortal.Domain.Enitites.ReviewEntities
         public string? Comment { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public ApplicationUser User { get; set; }
-        public Hotel Hotel { get; set; }
+        public ApplicationUser? User { get; set; }
+        public Hotel? Hotel { get; set; }
     }
 }
