@@ -9,5 +9,6 @@ namespace TravelBookingPortal.Domain.Repositories.ItineraryRepo
         Task AddAsync(Itinerary itinerary);
         Task UpdateAsync(Itinerary itinerary);
         Task DeleteAsync(int id);
+        Task<List<Itinerary>> GetByUserIdAsync(string userId);  // تعديل هنا للبحث عن الرحلات بناءً على UserId
     }
 }

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Collections.Generic;
 using TravelBookingPortal.Application.ItineraryFeatures.Dtos;
 
 namespace TravelBookingPortal.Application.ItineraryFeatures.Queries

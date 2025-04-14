@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using TravelBookingPortal.Application.ItineraryFeatures.Dtos;
-using TravelBookingPortal.Domain.Repositories.ItineraryRepo;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
