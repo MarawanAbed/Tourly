@@ -24,13 +24,12 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Booking
             }
         }
 
-        public async Task<IEnumerable<Domain.Enitites.BookingEntities.Booking>> GetAllBookings(int hotelId)
+        public async Task<IEnumerable<Domain.Enitites.BookingEntities.Booking>> GetAllBookings()
         {
             return await _context.Bookings
                 .Include(b => b.User)
                 .Include(b => b.Room)
                 .ThenInclude(r => r.Hotel)
-                .Where(b => b.Room.HotelId == hotelId)
                 .ToListAsync();
         }
 

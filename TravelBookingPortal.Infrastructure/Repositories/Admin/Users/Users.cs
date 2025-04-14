@@ -17,17 +17,11 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Users
                 throw new Exception("User not found");
             }
             var roles = await manager.GetRolesAsync(user);
-            if (roles.Contains("Admin"))
+            if (roles.Contains("User"))
             {
-                await manager.RemoveFromRoleAsync(user, "Admin");
-                await manager.AddToRoleAsync(user, "User");
-            }
-            else
-            {
-                await manager.RemoveFromRoleAsync(user, "User");
+                await manager.RemoveFromRoleAsync(user, role: "User");
                 await manager.AddToRoleAsync(user, "Admin");
             }
-
         }
 
         public async Task DeleteUser(string userId)
@@ -46,8 +40,18 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Users
 
         public async Task<IEnumerable<ApplicationUser>> GetAllUsers()
         {
-            return await manager.Users.ToListAsync();
+            var users = await manager.Users.ToListAsync();
+            var nonAdminUsers = new List<ApplicationUser>();
 
+            foreach (var user in users)
+            {
+                var roles = await manager.GetRolesAsync(user);
+                if (!roles.Contains("Admin"))
+                {
+                    nonAdminUsers.Add(user);
+                }
+            }
+            return nonAdminUsers;
         }
     }
 }

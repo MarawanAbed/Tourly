@@ -1,9 +1,7 @@
 ﻿
 
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using TravelBookingPortal.Application.Auth.Register.Commands;
-using TravelBookingPortal.Application.Auth.Register.Helper;
 using TravelBookingPortal.Domain.Enitites.User;
 
 namespace TravelBookingPortal.Application.Auth.Register.Mapper

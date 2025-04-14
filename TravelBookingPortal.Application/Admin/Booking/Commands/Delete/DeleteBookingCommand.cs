@@ -1,8 +1,11 @@
 ﻿
 
+using MediatR;
+
 namespace TravelBookingPortal.Application.Admin.Booking.Commands.Delete
 {
-    internal class DeleteBookingCommand
+    public class DeleteBookingCommand : IRequest
     {
+        public int BookingId { get; set; }
     }
 }

@@ -10,6 +10,5 @@ namespace TravelBookingPortal.Domain.Repositories.Admin.Rooms
         Task AddRoom(Room room);
         Task UpdateRoom(Room room);
         Task DeleteRoom(int id);
-        Task<IEnumerable<Room>> GetRoomsByHotelId(int hotelId);
     }
 }

@@ -6,7 +6,6 @@ namespace TravelBookingPortal.Application.Admin.Booking.Queries
 {
     public class GetAllBookingsQueries : IRequest<List<GetAllBookingsDto>>
     {
-        public int HotelId { get; set; }
     }
 
 

@@ -23,7 +23,7 @@ namespace TravelBookingPortal.Application.Admin.Booking.Queries
 
         public async Task<List<GetAllBookingsDto>> Handle(GetAllBookingsQuery request, CancellationToken cancellationToken)
         {
-            var bookingsList = await _bookings.GetAllBookings(request.HotelId);
+            var bookingsList = await _bookings.GetAllBookings();
             return _mapper.Map<List<GetAllBookingsDto>>(bookingsList);
         }
     }

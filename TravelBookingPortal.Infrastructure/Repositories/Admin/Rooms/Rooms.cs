@@ -32,11 +32,6 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Rooms
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<Room>> GetRoomsByHotelId(int hotelId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task UpdateRoom(Room room)
         {
             var existingRoom = await _context.Rooms.FindAsync(room.RoomId);

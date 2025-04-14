@@ -11,6 +11,8 @@ namespace TravelBookingPortal.Application.Admin.Booking.Mapper
         public BookingProfile() {
             CreateMap<Domain.Enitites.BookingEntities.Booking, CreateBookingCommand>();
 
+            CreateMap<CreateBookingCommand, Domain.Enitites.BookingEntities.Booking>();
+
             CreateMap<Domain.Enitites.BookingEntities.Booking, GetAllBookingsDto>()
                 .ForMember(GetAllBookingsDto => GetAllBookingsDto.HotelName, opt => opt.MapFrom(src => src.Room.Hotel.Name))
                 .ForMember(GetAllBookingsDto => GetAllBookingsDto.UserName, GetAllBookingsDto => GetAllBookingsDto.MapFrom(src => src.User.UserName));
