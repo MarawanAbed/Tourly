@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 
 using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
 
@@ -16,7 +16,7 @@ namespace TravelBookingPortal.Application.ItineraryFeatures.Commands
         public async Task<bool> Handle(UpdateItineraryCommand request, CancellationToken cancellationToken)
         {
             var itinerary = await _itineraryRepository.GetByIdAsync(request.ItineraryId);
-            if (itinerary == null)
+            if (itinerary == null || itinerary.UserId != request.UserId)
                 return false;
 
             itinerary.Title = request.Title;
