@@ -14,6 +14,7 @@ namespace TravelBookingPortal.Application.Admin.cities.Queries
             return
                 citiesList.Select(city => new GetAllCitiesDto
                 {
+                    CityId = city.CityId,
                     Name = city.Name,
                     ImageUrl = city.ImageUrl
                 }).ToList();

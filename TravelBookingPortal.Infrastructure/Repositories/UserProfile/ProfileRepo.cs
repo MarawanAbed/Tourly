@@ -7,7 +7,7 @@ using TravelBookingPortal.Infrastructure.DbContext;
 
 namespace TravelBookingPortal.Infrastructure.Repositories.Profile
 {
-    public class ProfileRepo:IProfileRepo
+    public class ProfileRepo : IProfileRepo
     {
         private readonly TravelBookingPortalDbContext _context;
         public ProfileRepo(TravelBookingPortalDbContext context)
@@ -17,7 +17,7 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Profile
 
         public async Task<ApplicationUser> GetUserProfileAsync(string userId)
         {
-           var user=await _context.Users.Include(p=>p.Preferences).FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.Users.Include(p => p.Preferences).FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
                 throw new Exception("User not found");
@@ -25,18 +25,18 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Profile
             return user;
         }
 
-        public async Task UpdateUserProfileAsync(string UserId   ,string FirstName,
-         string LastName ,
+        public async Task UpdateUserProfileAsync(string UserId, string FirstName,
+         string LastName,
          string? ImageUrl,
-         string PhoneNumber ,
+         string PhoneNumber,
          string? State,
-         string? City ,
-         string? Street ,
+         string? City,
+         string? Street,
          string Email,
          string UserName
         )
         {
-            var user = await _context.Users.FirstOrDefaultAsync(p=>p.Id==UserId);
+            var user = await _context.Users.FirstOrDefaultAsync(p => p.Id == UserId);
             if (user == null)
             {
                 throw new Exception("User not found");
@@ -47,17 +47,17 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Profile
             {
                 user.ImageUrl = ImageUrl;
             }
-            user.ImageUrl=user.ImageUrl;
+            user.ImageUrl = user.ImageUrl;
             user.PhoneNumber = PhoneNumber;
             user.State = State;
             user.City = City;
             user.Street = Street;
             user.Email = Email;
             user.UserName = UserName;
-            user.CreatedAt=user.CreatedAt;
+            user.CreatedAt = user.CreatedAt;
             user.DateOfBirth = user.DateOfBirth;
-           
-            
+
+
             await _context.SaveChangesAsync();
 
 

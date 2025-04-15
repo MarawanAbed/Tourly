@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.RoomLogic.Commands.Models;
 using TravelBookingPortal.Application.RoomLogic.Queries.Models;
+using TravelBookingPortal.Application.BookingLogic.Queries.Models;
+using TravelBookingPortal.Application.Payment.PaymentService;
 
 namespace TravelBookingPortal.API.Controllers.RoomController
 {
@@ -10,9 +12,12 @@ namespace TravelBookingPortal.API.Controllers.RoomController
     public class RoomController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public RoomController(IMediator mediator)
+        private readonly IPaymentService paymentService;
+
+        public RoomController(IMediator mediator, IPaymentService paymentService)
         {
             _mediator = mediator;
+            this.paymentService = paymentService;
         }
         [HttpGet("GetAvailableRooms")]
         public async Task<IActionResult> GetAvailableRooms([FromQuery]GetAvailableRoomsListQuery request)
@@ -24,7 +29,7 @@ namespace TravelBookingPortal.API.Controllers.RoomController
         public async Task<IActionResult> BookRoom([FromBody]BookRoomCommand book)
         {
              await _mediator.Send(book);
-             return Ok();
+            return RedirectToAction("GetLastPendingBooking", new { userId = book.UserId });
         }
         [HttpGet("GetRoomById/{id}")]
         public async Task<IActionResult> GetRoomById(int id)
@@ -37,6 +42,20 @@ namespace TravelBookingPortal.API.Controllers.RoomController
             
             return Ok(room);
         }
+        [HttpGet("GetLastBooking/{userId}")]
+
+        public async Task <IActionResult> GetLastPendingBooking(string userId)
+        {
+            var booking = await _mediator.Send(new GetlastBookingQuery(userId));
+            if (booking == null)
+            {
+                return NotFound();
+            }
+
+            var url = await paymentService.GeneratePaymentUrl(booking.TotalPrice, booking.BookingId);
+            return Ok(url);
+        }
+
 
     }
 }

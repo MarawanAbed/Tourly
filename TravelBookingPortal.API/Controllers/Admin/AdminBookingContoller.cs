@@ -23,14 +23,14 @@ namespace TravelBookingPortal.API.Controllers.Admin
         public async Task<IActionResult> CreateBooking(CreateBookingCommand command)
         {
             await mediator.Send(command);
-            return Ok("Booking created successfully");
+            return Ok(new { Message="Booking Created Successfully"});
         }
 
         [HttpDelete("DeleteBooking")]
         public async Task<IActionResult> DeleteBooking(int bookingId)
         {
             await mediator.Send(new DeleteBookingCommand { BookingId = bookingId });
-            return Ok("Booking deleted successfully");
+            return Ok(new {Message= "Booking deleted successfully" });
         }
     }
 }

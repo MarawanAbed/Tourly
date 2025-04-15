@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TravelBookingPortal.Domain.Enitites.CityEnities;
 using TravelBookingPortal.Domain.Repositories.CityRepo;
 using TravelBookingPortal.Infrastructure.DbContext;
