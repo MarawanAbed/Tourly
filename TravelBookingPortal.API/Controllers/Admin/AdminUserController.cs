@@ -22,7 +22,7 @@ namespace TravelBookingPortal.API.Controllers.Admin
         public async Task<IActionResult> ChangeUserRole([FromBody] ChangeUsersRoleCommnad command)
         {
             await mediator.Send(command);
-            return Ok("User role changed successfully");
+            return Ok(new { message = "User role changed successfully" });
         }
     }
 }
