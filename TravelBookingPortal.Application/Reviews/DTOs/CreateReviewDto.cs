@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelBookingPortal.Application.Reviews.DTOs
 {
-    internal class CreateReviewDto
+    public class CreateReviewDto
     {
         public string UserId { get; set; } = null!;
         public int HotelId { get; set; }
