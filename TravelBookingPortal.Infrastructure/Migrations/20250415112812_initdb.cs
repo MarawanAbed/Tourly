@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TravelBookingPortal.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitializeDatabase : Migration
+    public partial class initdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

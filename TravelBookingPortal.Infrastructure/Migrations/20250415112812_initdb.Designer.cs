@@ -12,8 +12,8 @@ using TravelBookingPortal.Infrastructure.DbContext;
 namespace TravelBookingPortal.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelBookingPortalDbContext))]
-    [Migration("20250414025030_InitializeDatabase")]
-    partial class InitializeDatabase
+    [Migration("20250415112812_initdb")]
+    partial class initdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
