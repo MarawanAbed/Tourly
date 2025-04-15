@@ -10,6 +10,6 @@ namespace TravelBookingPortal.Application.Reviews.Commands
 {
     public class CreateReviewCommand :IRequest
     {
-        //public CreateReviewDto ReviewDto { get; set; } = null!;
+        public CreateReviewDto ReviewDto { get; set; } = null!;
     }
 }
