@@ -35,7 +35,7 @@ namespace TravelBookingPortal.Application.UserProfile.Commands
                 }
                 imageUrl = $"/images/{fileName}";
             }
-            
+
             await _profileRepo.UpdateUserProfileAsync(request.UserId, request.FirstName,request.LastName,imageUrl, request.PhoneNumber,request.State,request.City,request.Street,request.Email,request.UserName);
 
             return true;

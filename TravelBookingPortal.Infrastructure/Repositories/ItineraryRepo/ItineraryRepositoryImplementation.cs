@@ -8,7 +8,7 @@ using TravelBookingPortal.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
 
-namespace TravelBookingPortal.Infrastructure.Repositories.Itinerary
+namespace TravelBookingPortal.Infrastructure.Repositories.ItineraryRepo
 {
     public class ItineraryRepositoryImplementation : IItineraryRepository
     {
@@ -29,28 +29,36 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Itinerary
             }
         }
 
-        async Task<List<Domain.Enitites.ItineraryEntities.Itinerary>> IItineraryRepository.GetAllAsync()
+        public async Task<List<Itinerary>> GetAllAsync()
         {
             return await _context.Itineraries.Include(i => i.Items).ToListAsync();
         }
 
-        async Task<Domain.Enitites.ItineraryEntities.Itinerary> IItineraryRepository.GetByIdAsync(int id)
+        public async Task<Itinerary> GetByIdAsync(int id)
         {
             return await _context.Itineraries.Include(i => i.Items)
                                             .FirstOrDefaultAsync(i => i.ItineraryId == id);
         }
 
-        public async Task AddAsync(Domain.Enitites.ItineraryEntities.Itinerary itinerary)
+        public async Task AddAsync(Itinerary itinerary)
         {
             await _context.Itineraries.AddAsync(itinerary);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Domain.Enitites.ItineraryEntities.Itinerary itinerary)
+        public async Task UpdateAsync(Itinerary itinerary)
         {
 
             _context.Itineraries.Update(itinerary);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Itinerary>> GetByUserIdAsync(string userId)
+        {
+            return await _context.Itineraries
+                .Where(i => i.UserId == userId)
+                .Include(i => i.Items)
+                .ToListAsync();
         }
     }
 }

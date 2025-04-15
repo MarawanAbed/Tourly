@@ -11,12 +11,12 @@ namespace TravelBookingPortal.Application.RoomLogic.Commands.Handler
 {
     public class BookRoomCommandHandler : IRequestHandler<BookRoomCommand>
     {
-        private readonly IBookingHub _bookingHub;
+        private readonly IBookingStatusNotifier notifier;
         private readonly IRoomRepository roomRepository;
 
-        public BookRoomCommandHandler(IBookingHub bookingHub,IRoomRepository roomRepository)
+        public BookRoomCommandHandler(IBookingStatusNotifier notifier, IRoomRepository roomRepository)
         {
-            _bookingHub = bookingHub;
+            this.notifier = notifier;
             this.roomRepository = roomRepository;
         }
         public async Task Handle(BookRoomCommand request, CancellationToken cancellationToken)
@@ -24,7 +24,7 @@ namespace TravelBookingPortal.Application.RoomLogic.Commands.Handler
             await roomRepository.AddBookingAsync(request.UserId, request.RoomId, request.CheckIn, request.CheckOut,request.TotalPrice);
 
 
-            await _bookingHub.SendBookingUpdate("Pending");
+            await notifier.NotifyBookingStatusAsync(request.RoomId, "Pending");
 
 
         }

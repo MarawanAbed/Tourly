@@ -1,12 +1,17 @@
 ﻿using MediatR;
 using TravelBookingPortal.Application.ItineraryFeatures.Dtos;
+
+using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
+using System.Linq;
+
 using System.Threading;
 using System.Threading.Tasks;
 using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
 
+
 namespace TravelBookingPortal.Application.ItineraryFeatures.Queries
 {
-    public class GetItineraryByIdQueryHandler : IRequestHandler<GetItineraryByIdQuery, ItineraryDto>
+    public class GetItineraryByIdQueryHandler : IRequestHandler<GetItineraryByIdQuery, ItineraryDto>  // تغيير List<ItineraryDto> إلى ItineraryDto
     {
         private readonly IItineraryRepository _itineraryRepository;
 
@@ -17,7 +22,7 @@ namespace TravelBookingPortal.Application.ItineraryFeatures.Queries
 
         public async Task<ItineraryDto> Handle(GetItineraryByIdQuery request, CancellationToken cancellationToken)
         {
-            var itinerary = await _itineraryRepository.GetByIdAsync(request.ItineraryId);
+            var itinerary = await _itineraryRepository.GetByIdAsync(request.ItineraryId);  // استخدام GetByIdAsync للبحث عن مخطط واحد
             if (itinerary == null)
                 return null;
 

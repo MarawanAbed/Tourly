@@ -11,7 +11,7 @@ namespace TravelBookingPortal.Application.Auth.logout.Commands
         {
             var userId = request.UserId;
             if (string.IsNullOrEmpty(userId))
-            {
+        {
                 throw new ArgumentException("User ID cannot be null or empty.", nameof(userId));
             }
             await logoutRepoistory.Logout(userId);

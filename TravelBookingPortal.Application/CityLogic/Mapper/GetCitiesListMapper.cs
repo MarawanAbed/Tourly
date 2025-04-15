@@ -7,7 +7,7 @@ namespace TravelBookingPortal.Application.CityLogic.Mapper
     {
         public void CitiesListMapping()
         {
-            CreateMap<City, GetCitiesDTO>();
+            CreateMap<City, GetCitiesDTO>();   
                
         }
     }
