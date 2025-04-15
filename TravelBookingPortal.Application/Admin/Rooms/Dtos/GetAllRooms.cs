@@ -3,6 +3,7 @@ namespace TravelBookingPortal.Application.Admin.Rooms.Dtos
 {
     public class GetAllRoomsDto
     {
+        public int RoomId { get; set; }
         public string RoomNumber { get; set; }
         public string RoomType { get; set; }
         public decimal PricePerNight { get; set; }

@@ -9,7 +9,9 @@ namespace TravelBookingPortal.Domain.Repositories.BookingRepo
 {
     public interface IBookingRepository
     {
-       public Task<Booking> GetBookingByIdAsync(int id);
-       public Task UpdateAsync(Booking booking);
+        Task<Booking> GetBookingByIdAsync(int bookingId);
+        Task UpdateAsync(Booking booking);
+
+        public Task<Booking> GetLastBookingPendingForUserAsync(string userId);
     }
 }

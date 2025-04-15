@@ -23,7 +23,7 @@ namespace TravelBookingPortal.API.Controllers.Admin
         public async Task<IActionResult> CreateCity([FromForm] CreateCityCommand command)
         {
             await mediator.Send(command);
-            return Ok("City Created Successfully");
+            return Ok(new{ Message= "City Created Successfully" });
         }
 
         [HttpDelete("DeleteCity")]
@@ -32,14 +32,16 @@ namespace TravelBookingPortal.API.Controllers.Admin
         {
             var command = new DeleteCityCommand { CityId = cityId };
             await mediator.Send(command);
-            return Ok("City Deleted Successfully");
+            return Ok(new { Message = "City Deleted Successfully" });
+
         }
 
         [HttpPut("UpdateCity")]
         public async Task<IActionResult> UpdateCity([FromForm] UpdateCityCommand command)
         {
             await mediator.Send(command);
-            return Ok("City Updated Successfully");
+            return Ok(new { Message = "City Updated Successfully" });
+
         }
     }
 }

@@ -48,6 +48,7 @@ namespace TravelBookingPortal.Infrastructure.Repositories.ItineraryRepo
 
         public async Task UpdateAsync(Itinerary itinerary)
         {
+
             _context.Itineraries.Update(itinerary);
             await _context.SaveChangesAsync();
         }
