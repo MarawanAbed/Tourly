@@ -1,5 +1,4 @@
-﻿
-using TravelBookingPortal.Domain.Enitites.HotelEntities;
+﻿using TravelBookingPortal.Domain.Enitites.HotelEntities;
 using TravelBookingPortal.Domain.Enitites.User;
 
 namespace TravelBookingPortal.Domain.Enitites.ReviewEntities
