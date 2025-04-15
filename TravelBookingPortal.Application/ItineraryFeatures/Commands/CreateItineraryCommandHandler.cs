@@ -17,7 +17,7 @@ namespace TravelBookingPortal.Application.ItineraryFeatures.Commands
         {
             var itinerary = new Itinerary
             {
-                UserId = request.UserId,
+                UserId = request.UserId, // UserId is assigned from logged-in user
                 Title = request.Title,
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,

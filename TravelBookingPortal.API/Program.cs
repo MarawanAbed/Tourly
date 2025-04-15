@@ -1,11 +1,10 @@
-
-
+using Microsoft.OpenApi.Models;
 using TravelBookingPortal.Infrastructure.Hubs;
 
 using TravelBookingPortal.Application.Extensions;
 using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Extensions;
-using Microsoft.Extensions.FileProviders;
+using Serilog;
 
 
 namespace TravelBookingPortal.API
@@ -15,6 +14,12 @@ namespace TravelBookingPortal.API
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Host.UseSerilog((context, services, configuration) =>
+            {
+                configuration
+                .ReadFrom.Configuration(context.Configuration);
+
+            });
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
 
@@ -26,8 +31,31 @@ namespace TravelBookingPortal.API
             builder.Services.AddControllers();
 
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TravelBookingPortal.API", Version = "v1" });
 
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement{
+                    {
+                        new OpenApiSecurityScheme{
+                            Reference = new OpenApiReference{
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
+            });
 
             var myPolicy = "myPolicy";
             builder.Services.AddCors(options =>
@@ -35,18 +63,19 @@ namespace TravelBookingPortal.API
                 options.AddPolicy(name: myPolicy, policy =>
                 {
                     policy
-                        .AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    .WithOrigins("http://localhost:4200", "https://79b1-197-63-73-173.ngrok-free.app/") //Rehab editing here
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials(); //Rehab Editing Here
+                    
                 });
             });
 
             var app = builder.Build();
 
-            //Mapping HuBs
-            app.MapHub<BookingHub>("/bookingHub");
             var scope = app.Services.CreateScope();
             await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
+
             // Configure the HTTP request pipeline.
             app.UseStaticFiles();
             if (app.Environment.IsDevelopment())
@@ -56,13 +85,14 @@ namespace TravelBookingPortal.API
             }
 
             app.UseHttpsRedirection();
+            app.UseRouting(); //Rehab editing here
+            app.UseCors(myPolicy); //Rehab editing here
             app.UseAuthentication();
             app.UseAuthorization();
 
 
-            app.UseCors(myPolicy);
-
-
+            //Mapping HuBs
+            app.MapHub<BookingStatusHub>("/bookingStatusHub"); //Rehab Editing Here
             app.MapControllers();
 
             app.Run();

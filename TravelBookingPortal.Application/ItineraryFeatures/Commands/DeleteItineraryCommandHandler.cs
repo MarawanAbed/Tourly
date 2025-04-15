@@ -1,6 +1,9 @@
 ﻿using MediatR;
 
+
+using System.Linq;
 using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
+
 
 namespace TravelBookingPortal.Application.ItineraryFeatures.Commands
 {
@@ -15,11 +18,13 @@ namespace TravelBookingPortal.Application.ItineraryFeatures.Commands
 
         public async Task<bool> Handle(DeleteItineraryCommand request, CancellationToken cancellationToken)
         {
-            var itinerary = await _itineraryRepository.GetByIdAsync(request.ItineraryId);
+            var itineraries = await _itineraryRepository.GetByUserIdAsync(request.UserId);
+
+            var itinerary = itineraries?.FirstOrDefault(i => i.ItineraryId == request.ItineraryId);
             if (itinerary == null)
                 return false;
 
-            await _itineraryRepository.DeleteAsync(request.ItineraryId);
+            await _itineraryRepository.DeleteAsync(itinerary.ItineraryId);
             return true;
         }
     }
