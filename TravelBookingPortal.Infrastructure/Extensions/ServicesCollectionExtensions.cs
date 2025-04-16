@@ -120,8 +120,8 @@ namespace TravelBookingPortal.Infrastructure.Extensions
              
             services.AddHttpClient<IPaymentService, PaymobService>();
             services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<INotificationService, NotificationService>();
-            services.AddTransient<IBookingHub, BookingHubService>();
+            
+           
             services.AddTransient<IProfileRepo, ProfileRepo>();
             services.AddTransient<IBookingRepository, BookingRepository>();
             

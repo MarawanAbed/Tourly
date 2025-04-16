@@ -21,5 +21,6 @@ namespace TravelBookingPortal.Infrastructure.Hubs
         {
             await _hubContext.Clients.All.SendAsync("ReceiveBookingStatus", roomId, status);
         }
+
     }
 }

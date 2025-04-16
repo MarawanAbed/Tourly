@@ -45,7 +45,7 @@ namespace TravelBookingPortal.Infrastructure.Repositories.RoomRepo
             
 
             .Where(r =>
-            r.IsAvailable &&
+            
                     r.RoomType.ToLower() == roomType.ToLower() && 
                     r.Hotel.City.Name.ToLower() == city.ToLower() &&
                     !r.Bookings.Any(b =>
