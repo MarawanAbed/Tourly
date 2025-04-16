@@ -12,8 +12,8 @@ using TravelBookingPortal.Infrastructure.DbContext;
 namespace TravelBookingPortal.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelBookingPortalDbContext))]
-    [Migration("20250415112812_initdb")]
-    partial class initdb
+    [Migration("20250416124706_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,7 +164,7 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 2000L);
 
                     b.Property<string>("BookingStatus")
                         .IsRequired()

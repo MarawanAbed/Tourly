@@ -1,7 +1,9 @@
 ﻿
 
 using MediatR;
+using TravelBookingPortal.Domain.IHubs;
 using TravelBookingPortal.Domain.Repositories.Admin.Booking;
+using TravelBookingPortal.Domain.Repositories.RoomRepo;
 
 namespace TravelBookingPortal.Application.Admin.Booking.Commands.Delete
 {
@@ -15,6 +17,8 @@ namespace TravelBookingPortal.Application.Admin.Booking.Commands.Delete
                 throw new ArgumentException("Booking ID cannot be zero.");
             }
             await bookings.DeleteBooking(request.BookingId);
+         
+
         }
     }
 }

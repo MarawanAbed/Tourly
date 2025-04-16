@@ -31,6 +31,7 @@ namespace TravelBookingPortal.API.Controllers.Admin
         {
             await mediator.Send(new DeleteBookingCommand { BookingId = bookingId });
             return Ok(new {Message= "Booking deleted successfully" });
+
         }
     }
 }

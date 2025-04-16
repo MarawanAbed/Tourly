@@ -63,7 +63,7 @@ namespace TravelBookingPortal.API
                 options.AddPolicy(name: myPolicy, policy =>
                 {
                     policy
-                    .WithOrigins("http://localhost:4200", "https://79b1-197-63-73-173.ngrok-free.app/") //Rehab editing here
+                    .WithOrigins("http://localhost:4200", "https://8834-197-63-30-95.ngrok-free.app") //Rehab editing here
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials(); //Rehab Editing Here
