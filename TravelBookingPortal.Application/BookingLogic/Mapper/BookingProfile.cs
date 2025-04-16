@@ -12,6 +12,7 @@ namespace TravelBookingPortal.Application.BookingLogic.Mapper
         public BookingProfile()
         {
             GetLastPindingBookingMapper();
+            GetBookingsByUserIdMapper();
         }
     }
 }

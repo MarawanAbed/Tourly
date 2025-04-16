@@ -37,6 +37,13 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Bookingrepo
 
             }
 
+        public async Task<IEnumerable<Booking>> GetBookingByUserIdAsync(string userId)
+        {
+            return await _context.Bookings
+                .Include(b=>b.Room).ThenInclude(c=>c.Hotel).ThenInclude(h=>h.City)
+                .Where(b => b.UserId == userId).ToListAsync();
+        }
+
         public async Task<Booking> GetLastBookingPendingForUserAsync(string userId)
         {
             return await _context.Bookings
