@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using TravelBookingPortal.Application.RoomLogic.Dtos;
 using TravelBookingPortal.Application.RoomLogic.Queries.Models;
