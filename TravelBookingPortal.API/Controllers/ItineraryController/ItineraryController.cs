@@ -35,33 +35,27 @@ public class ItineraryController : ControllerBase
         return itinerary;
     }
 
+
     // Create a new itinerary
     [HttpPost("add")]
     public async Task<ActionResult<int>> Create([FromBody] CreateItineraryCommand command)
     {
-        // Assuming UserId is extracted from logged-in user session/context
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        command.UserId = userId;
-
         var itineraryId = await _mediator.Send(command);
-
-        // Fixed the CreatedAtAction to reference GetByItineraryId
         return CreatedAtAction(nameof(GetByItineraryId), new { itineraryId = itineraryId }, itineraryId);
     }
 
-    // Update an existing itinerary
-    [HttpPut("edit/{userId}")]
-    public async Task<ActionResult> Update(string userId, [FromBody] UpdateItineraryCommand command)
-    {
-        if (userId != command.UserId)
-            return BadRequest();
 
+    // Update an existing itinerary
+    [HttpPut("edit")]
+    public async Task<ActionResult> Update([FromBody] UpdateItineraryCommand command)
+    {
         var result = await _mediator.Send(command);
         if (!result)
             return NotFound();
 
         return NoContent();
     }
+
 
     // Delete an itinerary
     [HttpDelete("delete/{userId}/{itineraryId}")]
@@ -73,4 +67,18 @@ public class ItineraryController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet("user")]
+    public async Task<IActionResult> GetUserItineraries()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+            return Unauthorized();
+
+        var query = new GetItinerariesByUserIdQuery(userId);
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
 }

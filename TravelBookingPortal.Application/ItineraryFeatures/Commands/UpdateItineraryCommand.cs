@@ -4,7 +4,6 @@ namespace TravelBookingPortal.Application.ItineraryFeatures.Commands
 {
     public class UpdateItineraryCommand : IRequest<bool>
     {
-        public string UserId { get; set; }
         public int ItineraryId { get; set; }
         public string Title { get; set; }
         public DateTime StartDate { get; set; }
