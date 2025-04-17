@@ -1,11 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.CityLogic.Queries.Models;
 
 namespace TravelBookingPortal.API.Controllers.CityController
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CityController : ControllerBase
     {
@@ -14,7 +13,7 @@ namespace TravelBookingPortal.API.Controllers.CityController
         {
             _mediator = mediator;
         }
-        [HttpGet]
+        [HttpGet("AllCities")]
         public async Task<IActionResult> GetAllCities ()
         {
             var result = await _mediator.Send(new GetCitiesListQuery());

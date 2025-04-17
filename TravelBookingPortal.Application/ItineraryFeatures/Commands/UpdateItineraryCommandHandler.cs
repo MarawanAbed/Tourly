@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;

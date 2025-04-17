@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
-using MediatR;
-using System;
-using TravelBookingPortal.Application.ItineraryFeatures.Commands;
+
 
 namespace TravelBookingPortal.Application.ItineraryFeatures.Commands
 {

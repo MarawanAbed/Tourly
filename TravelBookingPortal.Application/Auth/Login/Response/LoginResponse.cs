@@ -5,5 +5,6 @@ namespace TravelBookingPortal.Application.Auth.Login.Response
     {
         public bool Success { get; set; }
         public string Token { get; set; }
+        public string Id { get; set; }
     }
 }

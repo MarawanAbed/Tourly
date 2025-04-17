@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using TravelBookingPortal.Domain.Enitites.BookingEntities;
 using TravelBookingPortal.Domain.Enitites.CityEnities;
 using TravelBookingPortal.Domain.Enitites.HotelEntities;
@@ -34,10 +35,40 @@ namespace TravelBookingPortal.Infrastructure.DbContext
                 .IsUnique();
 
             builder.Entity<ItineraryItem>()
-                .HasKey(i=>i.ItemId);
+                .HasKey(i => i.ItemId);
 
             builder.Entity<Preference>()
                 .HasKey(UserPreference => UserPreference.PreferenceId);
+
+            builder.Entity<Hotel>()
+                .HasMany(h => h.Rooms)
+                .WithOne(r => r.Hotel)
+                .HasForeignKey(r => r.HotelId)
+                .OnDelete(DeleteBehavior.Cascade); 
+
+            builder.Entity<Room>()
+                .HasMany(r => r.Bookings)
+                .WithOne(b => b.Room)
+                .HasForeignKey(b => b.RoomId)
+                .OnDelete(DeleteBehavior.Cascade); 
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(u => u.Bookings)
+                .WithOne(b => b.User)
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.Cascade); 
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(u => u.Reviews)
+                .WithOne(r => r.User)
+                .HasForeignKey(r => r.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<City>()
+                .HasMany(c => c.Hotels)
+                .WithOne(h => h.City)
+                .HasForeignKey(h => h.CityId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

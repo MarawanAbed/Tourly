@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TravelBookingPortal.Domain.Repositories.ItineraryRepo;
 using TravelBookingPortal.Domain.Enitites.ItineraryEntities;
 using TravelBookingPortal.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
+using TravelBookingPortal.Domain.Repositories.ItineraryIRepo;
 
 namespace TravelBookingPortal.Infrastructure.Repositories.ItineraryRepo
 {

@@ -1,26 +1,34 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
 using TravelBookingPortal.Application.Auth.Register.Response;
-using TravelBookingPortal.Domain.Repositories.Auth;
+using TravelBookingPortal.Domain.Enitites.User;
+using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
 namespace TravelBookingPortal.Application.Auth.Register.Commands
 {
-    internal class RegisterCommandHandler(IRegisterRepoistory registerRepoistory) : IRequestHandler<RegisterCommand, RegisterResponse>
+    internal class RegisterCommandHandler(IRegisterRepoistory registerRepoistory,IMapper mapper,UserManager<ApplicationUser> userManager) : IRequestHandler<RegisterCommand, RegisterResponse>
     {
         public async Task<RegisterResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            var result = await registerRepoistory.Register(request.Email, request.Password, request.FirstName, request.LastName, request.Image);
+
+            var user= mapper.Map<ApplicationUser>(request);
+            var result = await registerRepoistory.Register(user, request.Password);
             if(result == null)
             {
                 return new RegisterResponse
                 {
                     Success = false,
-                    Token = "null"
+                    Token = "null",
+                    Id=null
+
                 };
             }
             return new RegisterResponse
             {
                 Success = true,
-                Token = result
+                Token = result,
+                Id = userManager.Users.FirstOrDefault(x => x.Email == request.Email)?.Id
             };
         }
     }
