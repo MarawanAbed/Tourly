@@ -14,5 +14,6 @@ namespace TravelBookingPortal.Domain.Repositories.BookingRepo
 
         public Task<Booking> GetLastBookingPendingForUserAsync(string userId);
         public Task<IEnumerable<Booking>> GetBookingByUserIdAsync(string userId);
+        public Task DeleteBookingForUserAsync(int bookingId);
     }
 }
