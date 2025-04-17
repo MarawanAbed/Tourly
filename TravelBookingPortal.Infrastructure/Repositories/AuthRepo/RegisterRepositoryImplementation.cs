@@ -16,7 +16,7 @@ namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
 
             var user =new ApplicationUser
             {
-                UserName = applicationUser.FirstName,
+                UserName = applicationUser.UserName,
                 Email = applicationUser.Email,
                 FirstName = applicationUser.FirstName,
                 LastName = applicationUser.LastName,
