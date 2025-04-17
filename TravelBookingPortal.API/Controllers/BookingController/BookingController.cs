@@ -5,7 +5,7 @@ using TravelBookingPortal.Application.BookingLogic.Queries.Models;
 
 namespace TravelBookingPortal.API.Controllers.BookingController
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BookingController : ControllerBase
     {
