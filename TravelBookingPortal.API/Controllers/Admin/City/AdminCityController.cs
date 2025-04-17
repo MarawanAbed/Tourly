@@ -6,7 +6,7 @@ using TravelBookingPortal.Application.Admin.cities.Commands.Delete;
 using TravelBookingPortal.Application.Admin.cities.Commands.Update;
 using TravelBookingPortal.Application.Admin.cities.Queries;
 
-namespace TravelBookingPortal.API.Controllers.Admin
+namespace TravelBookingPortal.API.Controllers.Admin.City
 {
     [Route("Admin/")]
     [ApiController]
@@ -23,7 +23,7 @@ namespace TravelBookingPortal.API.Controllers.Admin
         public async Task<IActionResult> CreateCity([FromForm] CreateCityCommand command)
         {
             await mediator.Send(command);
-            return Ok(new{ Message= "City Created Successfully" });
+            return Ok(new { Message = "City Created Successfully" });
         }
 
         [HttpDelete("DeleteCity")]

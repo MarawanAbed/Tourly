@@ -4,9 +4,9 @@ using MediatR;
 using TravelBookingPortal.Application.Admin.Users.Dtos;
 using TravelBookingPortal.Domain.Repositories.Admin.Users;
 
-namespace TravelBookingPortal.Application.Admin.Users.Queries
+namespace TravelBookingPortal.Application.Admin.Users.Queries.GetAllUsers
 {
-    public class GetAllUsersQueryHandler(IUsers users,IMapper mapper) : IRequestHandler<GetAllUsersQuery, IEnumerable<UsersDto>>
+    public class GetAllUsersQueryHandler(IUsers users, IMapper mapper) : IRequestHandler<GetAllUsersQuery, IEnumerable<UsersDto>>
     {
         public async Task<IEnumerable<UsersDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
