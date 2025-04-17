@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TravelBookingPortal.Application.Admin.Booking.Commands.Delete;
+using TravelBookingPortal.Application.BookingLogic.Commands.Models;
 using TravelBookingPortal.Application.BookingLogic.Queries.Models;
 
 namespace TravelBookingPortal.API.Controllers.BookingController
@@ -30,5 +32,20 @@ namespace TravelBookingPortal.API.Controllers.BookingController
                 return StatusCode(500, "Internal server error");
             }
         }
+        [HttpDelete("DeleteBooking/{bookingId}")]
+        public async Task<IActionResult> DeleteBooking(int bookingId)
+        {
+            try
+            {
+                await _mediator.Send(new DeleteBookingForUsersCommand { BookingId = bookingId });
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting booking with ID {BookingId}", bookingId);
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }
+

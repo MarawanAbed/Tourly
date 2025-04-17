@@ -22,6 +22,14 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Bookingrepo
             logger = _logger;
         }
 
+        public async Task DeleteBookingForUserAsync(int bookingId)
+        {
+           _context.Bookings.Remove(new Booking { BookingId = bookingId });
+            await _context.SaveChangesAsync();
+            
+
+        }
+
         public async Task<Booking> GetBookingByIdAsync(int id)
 
         {
