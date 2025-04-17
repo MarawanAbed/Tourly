@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.Reviews.Commands;
 using TravelBookingPortal.Application.Reviews.DTOs;
 using TravelBookingPortal.Application.Reviews.Queries;
+using TravelBookingPortal.Application.RoomLogic.Queries.Handlers;
 
 namespace TravelBookingPortal.API.Controllers.ReviewController
 {
@@ -31,5 +32,31 @@ namespace TravelBookingPortal.API.Controllers.ReviewController
             var result = await _mediator.Send(new GetReviewsByUserQuery { UserId = userId });
             return Ok(result);
         }
+
+        [HttpGet("hotel/{hotelId}")]
+        public async Task<IActionResult> GetHotelReviews(int hotelId)
+        {
+            var result = await _mediator.Send(new GetReviewsByHotelQuery { HotelId = hotelId });
+            return Ok(result);
+        }
+
+        [HttpDelete("{reviewId}")]
+        public async Task<IActionResult> DeleteReview(int reviewId)
+        {
+            await _mediator.Send(new DeleteReviewCommand { ReviewId = reviewId });
+            return Ok(new { message = "Review deleted successfully." });
+        }
+
+        [HttpPut("{reviewId}")]
+        public async Task<IActionResult> UpdateReview(int reviewId, [FromBody] UpdateReviewCommand command)
+        {
+            if (reviewId != command.ReviewId)
+                return BadRequest(" There are wrong , Mismatch between route and body.");
+
+            await _mediator.Send(command);
+            return Ok(new { message = "Review updated successfully." });
+        }
+
+
     }
 }
