@@ -20,7 +20,8 @@ namespace TravelBookingPortal.API
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
 
-           
+            builder.Services.AddHttpContextAccessor(); //Menna Editing Here
+
 
             builder.Services.AddApplication();
 
@@ -55,9 +56,11 @@ namespace TravelBookingPortal.API
                 options.AddPolicy(name: myPolicy, policy =>
                 {
                     policy
-                        .AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    .WithOrigins("http://localhost:4200", "https://8834-197-63-30-95.ngrok-free.app", "http://localhost:62237", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials(); //Rehab Editing Here
+                    
                 });
             });
 
