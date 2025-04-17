@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TravelBookingPortal.Application.Admin.Users.Commnads.ChangeRole;
-using TravelBookingPortal.Application.Admin.Users.Queries;
+using TravelBookingPortal.Application.Admin.Users.Commnads.DeleteUser;
+using TravelBookingPortal.Application.Admin.Users.Queries.GetAllAdmins;
+using TravelBookingPortal.Application.Admin.Users.Queries.GetAllUsers;
 
-namespace TravelBookingPortal.API.Controllers.Admin
+namespace TravelBookingPortal.API.Controllers.Admin.User
 {
     [Route("Admin/")]
     [ApiController]
@@ -18,11 +20,25 @@ namespace TravelBookingPortal.API.Controllers.Admin
             return Ok(result);
         }
 
+        [HttpGet("GetAllAdmins")]
+        public async Task<IActionResult> GetAllAdmins()
+        {
+            var result = await mediator.Send(new GetAllAdminsQuery());
+            return Ok(result);
+        }
         [HttpPost("ChangeUserRole")]
         public async Task<IActionResult> ChangeUserRole([FromBody] ChangeUsersRoleCommnad command)
         {
             await mediator.Send(command);
             return Ok(new { message = "User role changed successfully" });
         }
+
+        [HttpDelete("DeleteUser/{userId}")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            await mediator.Send(new DeleteUserCommand { UserId = userId });
+            return Ok(new { message = "User deleted successfully" });
+        }
+
     }
 }

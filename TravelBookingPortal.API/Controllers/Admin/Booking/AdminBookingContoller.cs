@@ -5,7 +5,7 @@ using TravelBookingPortal.Application.Admin.Booking.Commands.Create;
 using TravelBookingPortal.Application.Admin.Booking.Commands.Delete;
 using TravelBookingPortal.Application.Admin.Booking.Queries;
 
-namespace TravelBookingPortal.API.Controllers.Admin
+namespace TravelBookingPortal.API.Controllers.Admin.Booking
 {
     [Route("Admin/")]
     [ApiController]
@@ -23,14 +23,14 @@ namespace TravelBookingPortal.API.Controllers.Admin
         public async Task<IActionResult> CreateBooking(CreateBookingCommand command)
         {
             await mediator.Send(command);
-            return Ok(new { Message="Booking Created Successfully"});
+            return Ok(new { Message = "Booking Created Successfully" });
         }
 
         [HttpDelete("DeleteBooking")]
         public async Task<IActionResult> DeleteBooking(int bookingId)
         {
             await mediator.Send(new DeleteBookingCommand { BookingId = bookingId });
-            return Ok(new {Message= "Booking deleted successfully" });
+            return Ok(new { Message = "Booking deleted successfully" });
 
         }
     }

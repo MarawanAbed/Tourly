@@ -6,7 +6,7 @@ using TravelBookingPortal.Application.Admin.Rooms.Commands.Delete;
 using TravelBookingPortal.Application.Admin.Rooms.Commands.Update;
 using TravelBookingPortal.Application.Admin.Rooms.Queries;
 
-namespace TravelBookingPortal.API.Controllers.Admin
+namespace TravelBookingPortal.API.Controllers.Admin.Room
 {
     [Route("Admin/")]
     [ApiController]
@@ -16,7 +16,7 @@ namespace TravelBookingPortal.API.Controllers.Admin
         [HttpGet("GetAllRooms")]
         public async Task<IActionResult> GetAllRooms()
         {
-            var result = await mediator.Send(new GetAllRoomsQuery ());
+            var result = await mediator.Send(new GetAllRoomsQuery());
             return Ok(result);
         }
 
@@ -29,9 +29,9 @@ namespace TravelBookingPortal.API.Controllers.Admin
 
         [HttpDelete("DeleteRoom")]
 
-        public async Task<IActionResult> DeleteRoom( int roomId)
+        public async Task<IActionResult> DeleteRoom(int roomId)
         {
-            await mediator.Send(new DeleteRoomsCommand { RoomId=roomId});
+            await mediator.Send(new DeleteRoomsCommand { RoomId = roomId });
             return NoContent();
         }
 

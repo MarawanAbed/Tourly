@@ -6,7 +6,7 @@ using TravelBookingPortal.Application.Admin.Hotels.Commands.Delete;
 using TravelBookingPortal.Application.Admin.Hotels.Commands.Update;
 using TravelBookingPortal.Application.Admin.Hotels.Queries;
 
-namespace TravelBookingPortal.API.Controllers.Admin
+namespace TravelBookingPortal.API.Controllers.Admin.Hotel
 {
     [Route("Admin/")]
     [ApiController]
