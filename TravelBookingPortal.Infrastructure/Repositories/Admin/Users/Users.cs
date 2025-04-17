@@ -38,6 +38,21 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Users
             }
         }
 
+        public async Task<IEnumerable<ApplicationUser>> GetAllAdmins()
+        {
+            var users = await manager.Users.ToListAsync();
+            var adminUsers = new List<ApplicationUser>();
+            foreach (var user in users)
+            {
+                var roles = await manager.GetRolesAsync(user);
+                if (roles.Contains("Admin"))
+                {
+                    adminUsers.Add(user);
+                }
+            }
+            return adminUsers;
+        }
+
         public async Task<IEnumerable<ApplicationUser>> GetAllUsers()
         {
             var users = await manager.Users.ToListAsync();

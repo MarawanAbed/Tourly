@@ -16,13 +16,13 @@ namespace TravelBookingPortal.API.Controllers.Auth
         {
             try 
             {
-                var result = await mediator.Send(command);
-                if (result.Success)
-                {
-                    return Ok(result);
-                }
-                return BadRequest(result);
+            var result = await mediator.Send(command);
+            if (result.Success)
+            {
+                return Ok(result);
             }
+            return BadRequest(result);
+        }
             catch (Exception ex)
             {
                 return BadRequest(new { message = ex.Message });

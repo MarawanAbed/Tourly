@@ -69,6 +69,10 @@ namespace TravelBookingPortal.Infrastructure.DbContext
                 .WithOne(h => h.City)
                 .HasForeignKey(h => h.CityId)
                 .OnDelete(DeleteBehavior.Cascade);
+            // Set BookingId to start from 2000
+            builder.Entity<Booking>()
+                .Property(b => b.BookingId)
+                .UseIdentityColumn(2000, 1);
         }
     }
 }

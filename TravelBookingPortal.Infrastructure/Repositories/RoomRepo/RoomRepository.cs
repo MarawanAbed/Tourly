@@ -39,17 +39,23 @@ namespace TravelBookingPortal.Infrastructure.Repositories.RoomRepo
         public async Task<IEnumerable<Room>> GetRoomByCityAndAvailabilityAsync(string city, DateTime checkIn, DateTime checkOut, string roomType)
         {
             return await _context.Rooms
+            .Include(r => r.Bookings)
             .Include(r => r.Hotel)
             .ThenInclude(h => h.City)
+            
+
             .Where(r =>
-            r.IsAvailable &&
+            
                     r.RoomType.ToLower() == roomType.ToLower() && 
                     r.Hotel.City.Name.ToLower() == city.ToLower() &&
                     !r.Bookings.Any(b =>
-                        (checkIn < b.CheckOutDate) && (checkOut > b.CheckInDate)
+                        ((checkIn < b.CheckOutDate) && (checkOut > b.CheckInDate)) &&
+                     b.BookingStatus != "Pending"
                     )
                 )
                 .ToListAsync();
+
+            
         }
 
         public async Task<Room> GetRoomByIdAsync(int roomId)

@@ -9,7 +9,11 @@ namespace TravelBookingPortal.Domain.Repositories.BookingRepo
 {
     public interface IBookingRepository
     {
-       public Task<Booking> GetBookingByIdAsync(int id);
+       public Task<Booking> GetBookingByIdAsync(int bookingId);
        public Task UpdateAsync(Booking booking);
+
+        public Task<Booking> GetLastBookingPendingForUserAsync(string userId);
+        public Task<IEnumerable<Booking>> GetBookingByUserIdAsync(string userId);
+        public Task DeleteBookingForUserAsync(int bookingId);
     }
 }

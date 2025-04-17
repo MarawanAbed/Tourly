@@ -1,9 +1,11 @@
 using Microsoft.OpenApi.Models;
 using TravelBookingPortal.Infrastructure.Hubs;
+
 using TravelBookingPortal.Application.Extensions;
 using TravelBookingPortal.Infrastructure.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Extensions;
 using Serilog;
+
 
 namespace TravelBookingPortal.API
 {
@@ -21,8 +23,8 @@ namespace TravelBookingPortal.API
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
 
-            builder.Services.AddHttpContextAccessor(); //Menna Editing Here
 
+            builder.Services.AddHttpContextAccessor(); //Menna Editing Here
 
             builder.Services.AddApplication();
 
@@ -62,7 +64,8 @@ namespace TravelBookingPortal.API
                 options.AddPolicy(name: myPolicy, policy =>
                 {
                     policy
-                    .WithOrigins("http://localhost:4200", "https://8834-197-63-30-95.ngrok-free.app", "http://localhost:62237", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
+
+                    .WithOrigins("http://localhost:4200", "https://8834-197-63-30-95.ngrok-free.app", "http://localhost:57886", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials(); //Rehab Editing Here
@@ -72,8 +75,6 @@ namespace TravelBookingPortal.API
 
             var app = builder.Build();
 
-            // Mapping Hubs
-            app.MapHub<BookingHub>("/bookingHub");
             var scope = app.Services.CreateScope();
             await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
 
@@ -86,11 +87,14 @@ namespace TravelBookingPortal.API
             }
 
             app.UseHttpsRedirection();
+            app.UseRouting(); //Rehab editing here
+            app.UseCors(myPolicy); //Rehab editing here
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors(myPolicy);
 
+            //Mapping HuBs
+            app.MapHub<BookingStatusHub>("/bookingStatusHub"); //Rehab Editing Here
             app.MapControllers();
 
             app.Run();

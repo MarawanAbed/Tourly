@@ -13,8 +13,8 @@ namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
             var user = await _signInManager.UserManager.FindByIdAsync(userId);
             if (user != null)
             {
-                await _signInManager.SignOutAsync();
-            }
+             await _signInManager.SignOutAsync();
+        }
             else
             {
                 throw new Exception("User not found");

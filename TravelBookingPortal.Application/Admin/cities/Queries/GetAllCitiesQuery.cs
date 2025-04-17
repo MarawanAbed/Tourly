@@ -6,5 +6,7 @@ namespace TravelBookingPortal.Application.Admin.cities.Queries
 {
     public class GetAllCitiesQuery : IRequest<List<GetAllCitiesDto>>
     {
+        public int? CityId { get; set; }
+
     }
 }

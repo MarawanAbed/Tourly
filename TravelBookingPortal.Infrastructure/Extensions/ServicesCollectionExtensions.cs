@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TravelBookingPortal.Domain.Enitites.User;
 using TravelBookingPortal.Infrastructure.DbContext;
-using TravelBookingPortal.Infrastructure.Repositories.Itinerary;
+using TravelBookingPortal.Infrastructure.Repositories.ItineraryRepo;
 using TravelBookingPortal.Domain.Repositories.CityRepo;
 using TravelBookingPortal.Infrastructure.Repositories.CityRepo;
 using TravelBookingPortal.Infrastructure.Seeder.Bookings;
@@ -33,6 +33,9 @@ using TravelBookingPortal.Infrastructure.Repositories.AuthRepo;
 using TravelBookingPortal.Domain.Repositories.AuthRepo;
 using TravelBookingPortal.Domain.IHubs;
 using TravelBookingPortal.Infrastructure.Hubs;
+
+using TravelBookingPortal.Domain.Repositories.ReviewRepo;
+using TravelBookingPortal.Infrastructure.Repositories.ReviewRepo;
 using TravelBookingPortal.Domain.Repositories.Admin.Booking;
 using TravelBookingPortal.Infrastructure.Repositories.Admin.Booking;
 using TravelBookingPortal.Domain.Repositories.Admin.Cities;
@@ -44,6 +47,8 @@ using TravelBookingPortal.Domain.Repositories.Admin.Rooms;
 using TravelBookingPortal.Infrastructure.Repositories.Admin.Rooms;
 using TravelBookingPortal.Domain.Repositories.Admin.Users;
 using TravelBookingPortal.Infrastructure.Repositories.Admin.Users;
+using TravelBookingPortal.Domain.Repositories;
+
 
 
 
@@ -110,20 +115,25 @@ namespace TravelBookingPortal.Infrastructure.Extensions
             services.AddScoped<ICitySeeder, CitySeeder>();
             services.AddTransient<ICityRepository, CityRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
-            
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+
+             
             services.AddHttpClient<IPaymentService, PaymobService>();
             services.AddScoped<IBookingRepository, BookingRepository>();
-            services.AddScoped<INotificationService, NotificationService>();
-            services.AddTransient<IBookingHub, BookingHubService>();
+            
+           
             services.AddTransient<IProfileRepo, ProfileRepo>();
-
+            services.AddTransient<IBookingRepository, BookingRepository>();
+            
             services.AddScoped<IBooking, Booking>();
             services.AddScoped<ICities, Cities>();
             services.AddScoped<IHotels, Hotels>();
             services.AddScoped<IRooms, Rooms>();
             services.AddScoped<IUsers, Users>();
-
-
+            services.AddTransient<IProfileRepo, ProfileRepo>();
+            
+            services.AddScoped<IBookingStatusNotifier, BookingStatusNotifier>();
+           
             // Add SignalR 
             services.AddSignalR();
 

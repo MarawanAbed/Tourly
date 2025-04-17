@@ -8,8 +8,10 @@ namespace TravelBookingPortal.Application.RoomLogic.Mapper
     {
         public void  GetAvailableRoomListMapper()
         {
-            CreateMap<Room, GetRoomsDTO>().ForMember(dest => dest.HotelName, opt => opt.MapFrom(src => src.Hotel.Name));
-                
+
+            CreateMap<Room, GetRoomsDTO>()
+           .ForMember(dest => dest.HotelName, opt => opt.MapFrom(src => src.Hotel.Name));
+           
         }
 
     }
