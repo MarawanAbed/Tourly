@@ -12,5 +12,6 @@ namespace TravelBookingPortal.Application.Reviews.DTOs
         public int HotelId { get; set; }
         public int Rating { get; set; }
         public string? Comment { get; set; }
+
     }
 }
