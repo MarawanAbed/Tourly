@@ -20,5 +20,6 @@ namespace TravelBookingPortal.Application.BookingLogic.DTOs
         public string BookingStatus { get; set; }
         public string HotelName { get; set; }
         public string CityName { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }
