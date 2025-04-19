@@ -9,7 +9,7 @@ namespace TravelBookingPortal.Domain.Repositories.ReviewRepo
 {
     public interface IReviewRepository
     {
-        public Task AddAsync(Review review);
+        public Task AddAsync(Review review,string hotelName);
 
         public Task<List<Review>> GetByUserIdAsync(string userId);
 

@@ -24,9 +24,9 @@ namespace TravelBookingPortal.Application.Reviews.Commands
 
             public async Task<Unit> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
             {
-                var review = _mapper.Map<Review>(request.ReviewDto);
+                var review = _mapper.Map<Review>(request);
                 review.CreatedAt = DateTime.UtcNow;
-                await _repository.AddAsync(review);
+                await _repository.AddAsync(review,request.HotelName);
                 return Unit.Value;
             }
 

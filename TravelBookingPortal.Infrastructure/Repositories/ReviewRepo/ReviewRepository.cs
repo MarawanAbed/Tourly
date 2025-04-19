@@ -15,9 +15,12 @@ namespace TravelBookingPortal.Infrastructure.Repositories.ReviewRepo
             context = _context;
         }
 
-        public async Task AddAsync(Review review)
+        public async Task AddAsync(Review review,string hotelName)
         {
-            context.Reviews.Add(review);
+            var hotel = await context.Hotels
+          .FirstOrDefaultAsync(h => h.Name == hotelName);
+            review.HotelId = hotel.HotelId;
+           await context.Reviews.AddAsync(review);
             await context.SaveChangesAsync();
         }
 

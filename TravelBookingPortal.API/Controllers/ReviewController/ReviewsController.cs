@@ -19,9 +19,9 @@ namespace TravelBookingPortal.API.Controllers.ReviewController
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateReview([FromBody] CreateReviewDto dto)
+        public async Task<IActionResult> CreateReview([FromBody] CreateReviewCommand command)
         {
-            var command = new CreateReviewCommand { ReviewDto = dto };
+            
             await _mediator.Send(command);
             return Ok(new { message = "Review created successfully." });
         }
