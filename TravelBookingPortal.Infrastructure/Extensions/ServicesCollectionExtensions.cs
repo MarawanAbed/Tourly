@@ -48,6 +48,7 @@ using TravelBookingPortal.Infrastructure.Repositories.Admin.Rooms;
 using TravelBookingPortal.Domain.Repositories.Admin.Users;
 using TravelBookingPortal.Infrastructure.Repositories.Admin.Users;
 using TravelBookingPortal.Domain.Repositories;
+using TravelBookingPortal.Domain.Repositories.ContuctUs;
 
 
 
@@ -120,8 +121,9 @@ namespace TravelBookingPortal.Infrastructure.Extensions
              
             services.AddHttpClient<IPaymentService, PaymobService>();
             services.AddScoped<IBookingRepository, BookingRepository>();
-            
-           
+            services.AddTransient<IEmailService, EmailService>();
+
+
             services.AddTransient<IProfileRepo, ProfileRepo>();
             services.AddTransient<IBookingRepository, BookingRepository>();
             
