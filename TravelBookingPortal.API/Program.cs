@@ -65,7 +65,7 @@ namespace TravelBookingPortal.API
                 {
                     policy
 
-                    .WithOrigins("http://localhost:4200", "https://8834-197-63-30-95.ngrok-free.app", "http://localhost:51031", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
+                    .WithOrigins("http://localhost:4200", "https://8834-197-63-30-95.ngrok-free.app", "http://localhost:50488", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials(); //Rehab Editing Here
