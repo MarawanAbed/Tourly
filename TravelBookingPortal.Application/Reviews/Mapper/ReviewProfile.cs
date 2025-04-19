@@ -14,7 +14,10 @@ namespace TravelBookingPortal.Application.Reviews.Mapper
         public ReviewProfile()
         {
             CreateMap<CreateReviewDto, Review>();
-            CreateMap<Review, ReviewDto>();
+            CreateMap<Review, ReviewDto>()
+    .ForMember(dest => dest.UserImage, opt => opt.MapFrom(src => src.User.ImageUrl))
+    .ForMember(dest=>dest.UserName, opt=>opt.MapFrom(src=>src.User.UserName))
+    ;
         }
     }
 }
