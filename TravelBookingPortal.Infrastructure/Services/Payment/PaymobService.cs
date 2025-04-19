@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using TravelBookingPortal.Application.Payment.PaymentService;
 
-namespace TravelBookingPortal.Infrastructure.Services
+namespace TravelBookingPortal.Infrastructure.Services.Payment
 {
     public class PaymobService : IPaymentService
     {
@@ -14,19 +14,19 @@ namespace TravelBookingPortal.Infrastructure.Services
             _config = config ?? throw new ArgumentNullException(nameof(config));
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
-            
+
             _httpClient.BaseAddress = new Uri("https://accept.paymob.com/api/");
         }
 
         public async Task<string> GeneratePaymentUrl(decimal amount, int bookingId)
         {
 
-            
+
             var apiKey = _config["Paymob:ApiKey"] ?? throw new InvalidOperationException("Paymob:ApiKey is missing in configuration.");
             var integrationId = _config["Paymob:IntegrationId"] ?? throw new InvalidOperationException("Paymob:IntegrationId is missing in configuration.");
             var iframeId = _config["Paymob:IframeId"] ?? throw new InvalidOperationException("Paymob:IframeId is missing in configuration.");
 
-            
+
             var authUrl = "auth/tokens";
             var authResponse = await _httpClient.PostAsJsonAsync(authUrl, new { api_key = apiKey });
             if (!authResponse.IsSuccessStatusCode)
@@ -38,7 +38,7 @@ namespace TravelBookingPortal.Infrastructure.Services
 
             string token = authContent.token;
 
-            
+
             var orderUrl = "ecommerce/orders";
             var orderRequest = new
             {
@@ -57,7 +57,7 @@ namespace TravelBookingPortal.Infrastructure.Services
             var orderContent = await orderResponse.Content.ReadFromJsonAsync<OrderResponse>();
             long orderId = orderContent.id;
 
-            
+
             var paymentUrl = "acceptance/payment_keys";
             var paymentKeyRequest = new
             {
@@ -92,7 +92,7 @@ namespace TravelBookingPortal.Infrastructure.Services
             var paymentKeyContent = await paymentKeyResponse.Content.ReadFromJsonAsync<PaymentKeyResponse>();
             string paymentKey = paymentKeyContent.token;
 
-            
+
             return $"https://accept.paymob.com/api/acceptance/iframes/{iframeId}?payment_token={paymentKey}";
         }
 
@@ -108,7 +108,7 @@ namespace TravelBookingPortal.Infrastructure.Services
 
         private class PaymentKeyResponse
         {
-            public string token { get; set; } 
+            public string token { get; set; }
         }
     }
 }

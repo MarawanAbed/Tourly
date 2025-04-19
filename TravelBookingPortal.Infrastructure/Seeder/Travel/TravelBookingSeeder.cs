@@ -3,7 +3,6 @@ using TravelBookingPortal.Infrastructure.Seeder.Bookings;
 using TravelBookingPortal.Infrastructure.Seeder.Cities;
 using TravelBookingPortal.Infrastructure.Seeder.HotelsAndRooms;
 using TravelBookingPortal.Infrastructure.Seeder.ItinerariesAndItems;
-using TravelBookingPortal.Infrastructure.Seeder.Preferences;
 using TravelBookingPortal.Infrastructure.Seeder.Reviews;
 using TravelBookingPortal.Infrastructure.Seeder.Roles;
 using TravelBookingPortal.Infrastructure.Seeder.Users;
@@ -15,7 +14,6 @@ namespace TravelBookingPortal.Infrastructure.Seeder.Travel
         IRoleSeeder roleSeeder,
         IUserSeeder userSeeder,
         IHotelAndRoomSeeder hotelSeeder,
-        IPreferenceSeeder preferenceSeeder,
         IBookingSeeder bookingSeeder,
         IItineraryAndItemsSeeder itinerarySeeder,
         IReviewSeeder reviewSeeder,
@@ -37,8 +35,6 @@ namespace TravelBookingPortal.Infrastructure.Seeder.Travel
                 // Seed Hotels and Rooms
                 await hotelSeeder.SeedHotelsAndRooms();
 
-                // Seed User Preferences
-                await preferenceSeeder.SeedPreferences();
 
                 // Seed Bookings
                 await bookingSeeder.SeedBookings();
@@ -52,5 +48,7 @@ namespace TravelBookingPortal.Infrastructure.Seeder.Travel
 
             }
         }
+
+
     }
 }

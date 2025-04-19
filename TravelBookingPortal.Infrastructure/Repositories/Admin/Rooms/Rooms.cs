@@ -47,7 +47,6 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Rooms
                     existingRoom.ImageUrl = existingRoom.ImageUrl;
                 }
                 existingRoom.PricePerNight = room.PricePerNight;
-                existingRoom.IsAvailable = existingRoom.IsAvailable;
                 existingRoom.RoomType = room.RoomType;
                 existingRoom.RoomNumber = existingRoom.RoomNumber;
                 existingRoom.HotelId = existingRoom.HotelId;

@@ -5,17 +5,14 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using TravelBookingPortal.Application.Auth.Services;
 using TravelBookingPortal.Domain.Enitites.User;
 
-namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
+namespace TravelBookingPortal.Infrastructure.Services.Auth
 {
-    public class GenerateToken(UserManager<ApplicationUser> userManager, IConfiguration configuration, ILogger<GenerateToken> logger) : IGenerateToken
+    public class GenerateJwtToken(UserManager<ApplicationUser> userManager, IConfiguration configuration, ILogger<GenerateJwtToken> logger) : IGenerateJwtToken
     {
-        private readonly UserManager<ApplicationUser> _userManager = userManager;
-        private readonly IConfiguration _configuration = configuration;
-        private readonly ILogger<GenerateToken> _logger = logger;
-
-        public string GenerateJwtToken(ApplicationUser user)
+        string IGenerateJwtToken.GenerateJwtToken(ApplicationUser user)
         {
             //add custom claims
             var claims = new List<Claim>
@@ -26,23 +23,23 @@ namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
                     new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
             //add roles to claims
-            var roles = _userManager.GetRolesAsync(user).Result;
+            var roles = userManager.GetRolesAsync(user).Result;
             foreach (var role in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             //generate token
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
-            issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
+            issuer: configuration["Jwt:Issuer"],
+                audience: configuration["Jwt:Audience"],
             claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds);
-            _logger.LogInformation("JWT token generated for user {Email}.", user.Email);
-            _logger.LogInformation("Token: {Token}", token.ValidTo);
+            logger.LogInformation("JWT token generated for user {Email}.", user.Email);
+            logger.LogInformation("Token: {Token}", token.ValidTo);
             //return token
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

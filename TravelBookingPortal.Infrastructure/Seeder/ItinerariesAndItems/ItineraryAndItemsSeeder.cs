@@ -31,11 +31,7 @@ namespace TravelBookingPortal.Infrastructure.Seeder.ItinerariesAndItems
                         StartDate = DateTime.UtcNow.AddDays(1),
                         EndDate = DateTime.UtcNow.AddDays(3),
                         Notes = "Explore the city",
-                        Items = new List<ItineraryItem>
-                        {
-                            new ItineraryItem { Description = "Visit Statue of Liberty", DateTime = DateTime.UtcNow.AddDays(1).AddHours(10) },
-                            new ItineraryItem { Description = "Dinner at Times Square", DateTime = DateTime.UtcNow.AddDays(1).AddHours(18) }
-                        }
+
                     }
                 };
 

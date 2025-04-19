@@ -27,7 +27,6 @@ namespace TravelBookingPortal.Infrastructure.Seeder.Bookings
                         TotalPrice = 200.00m,
                         BookingStatus = "Confirmed",
                         CreatedAt = DateTime.UtcNow,
-                        PaymentId = "pi_001"
                     },
                     new() {
                         UserId = jane.Id,

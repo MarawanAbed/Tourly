@@ -7,7 +7,6 @@ using TravelBookingPortal.Domain.Enitites.BookingEntities;
 using TravelBookingPortal.Domain.Enitites.CityEnities;
 using TravelBookingPortal.Domain.Enitites.HotelEntities;
 using TravelBookingPortal.Domain.Enitites.ItineraryEntities;
-using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
 using TravelBookingPortal.Domain.Enitites.ReviewEntities;
 using TravelBookingPortal.Domain.Enitites.RoomEntities;
 using TravelBookingPortal.Domain.Enitites.User;
@@ -21,8 +20,6 @@ namespace TravelBookingPortal.Infrastructure.DbContext
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Itinerary> Itineraries { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Preference> UserPreferences { get; set; }
-        public DbSet<ItineraryItem> ItineraryItems { get; set; }
         public DbSet<City> Cities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -34,11 +31,9 @@ namespace TravelBookingPortal.Infrastructure.DbContext
                 .HasIndex(r => new { r.HotelId, r.RoomNumber })
                 .IsUnique();
 
-            builder.Entity<ItineraryItem>()
-                .HasKey(i => i.ItemId);
 
-            builder.Entity<Preference>()
-                .HasKey(UserPreference => UserPreference.PreferenceId);
+
+
 
             builder.Entity<Hotel>()
                 .HasMany(h => h.Rooms)

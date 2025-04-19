@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using TravelBookingPortal.Domain.Repositories.AuthRepo;
+using TravelBookingPortal.Application.Auth.Logout.Services;
 
 
 namespace TravelBookingPortal.Application.Auth.logout.Commands
 {
-    public class LogoutCommandHandler(ILogoutRepository logoutRepoistory) : IRequestHandler<LogoutCommand>
+    public class LogoutCommandHandler(ILogoutService logoutService) : IRequestHandler<LogoutCommand>
     {
 
         public async Task Handle(LogoutCommand request, CancellationToken cancellationToken)
@@ -14,7 +14,7 @@ namespace TravelBookingPortal.Application.Auth.logout.Commands
         {
                 throw new ArgumentException("User ID cannot be null or empty.", nameof(userId));
             }
-            await logoutRepoistory.Logout(userId);
+            await logoutService.Logout(userId);
         }
     }
 }

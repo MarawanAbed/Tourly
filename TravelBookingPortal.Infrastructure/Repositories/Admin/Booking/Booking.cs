@@ -43,7 +43,6 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Booking
                 existingBooking.TotalPrice = booking.TotalPrice;
                 existingBooking.BookingStatus = booking.BookingStatus;
                 existingBooking.CreatedAt = booking.CreatedAt;
-                existingBooking.PaymentId = booking.PaymentId;
                 await _context.SaveChangesAsync();
             }
         }

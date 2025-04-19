@@ -1,5 +1,4 @@
-﻿using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
-using TravelBookingPortal.Domain.Enitites.User;
+﻿using TravelBookingPortal.Domain.Enitites.User;
 
 namespace TravelBookingPortal.Domain.Repositories.UserProfile
 {

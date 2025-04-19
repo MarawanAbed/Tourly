@@ -1,20 +1,25 @@
 ﻿
 
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-
+using TravelBookingPortal.Application.Auth.Login.Services;
+using TravelBookingPortal.Application.Auth.Services;
 using TravelBookingPortal.Domain.Enitites.User;
-using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
-namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
+namespace TravelBookingPortal.Infrastructure.Services.Auth
 {
-    public class LoginRepositoryImplementation(
-        UserManager<ApplicationUser> _userManager,
-        IConfiguration _configuration,ILogger<LoginRepositoryImplementation>logger,
-        IGenerateToken _generateToken
-        ) : ILoginRepository
+    public class LoginService(UserManager<ApplicationUser> _userManager, IGenerateJwtToken _generateToken,ILogger<LoginService> logger) : ILoginService
     {
+        public async Task<string> GetUserId(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+            return user.Id;
+        }
+
         public async Task<string?> Login(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -26,8 +31,5 @@ namespace TravelBookingPortal.Infrastructure.Repositories.AuthRepo
             logger.LogWarning("Invalid login attempt for user {Email}.", email);
             throw new Exception("Invalid login attempt.");
         }
-
     }
-
 }
-    

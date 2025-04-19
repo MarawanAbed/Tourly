@@ -1,5 +1,4 @@
 ﻿using TravelBookingPortal.Domain.Enitites.User;
-using TravelBookingPortal.Domain.Enitites;
 namespace TravelBookingPortal.Domain.Enitites.ItineraryEntities
 {
     public class Itinerary
@@ -12,6 +11,6 @@ namespace TravelBookingPortal.Domain.Enitites.ItineraryEntities
         public string? Notes { get; set; }
 
         public ApplicationUser? User { get; set; }
-        public List<ItineraryItem>? Items { get; set; }
+
     }
 }

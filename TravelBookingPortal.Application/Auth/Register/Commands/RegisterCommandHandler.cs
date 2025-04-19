@@ -1,19 +1,18 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using TravelBookingPortal.Application.Auth.Register.Response;
+using TravelBookingPortal.Application.Auth.Register.Services;
 using TravelBookingPortal.Domain.Enitites.User;
-using TravelBookingPortal.Domain.Repositories.AuthRepo;
 
 namespace TravelBookingPortal.Application.Auth.Register.Commands
 {
-    internal class RegisterCommandHandler(IRegisterRepoistory registerRepoistory,IMapper mapper,UserManager<ApplicationUser> userManager) : IRequestHandler<RegisterCommand, RegisterResponse>
+    internal class RegisterCommandHandler(IRegisterService registerService,IMapper mapper) : IRequestHandler<RegisterCommand, RegisterResponse>
     {
         public async Task<RegisterResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
 
             var user= mapper.Map<ApplicationUser>(request);
-            var result = await registerRepoistory.Register(user, request.Password);
+            var result = await registerService.Register(user, request.Password);
             if(result == null)
             {
                 return new RegisterResponse
@@ -28,7 +27,7 @@ namespace TravelBookingPortal.Application.Auth.Register.Commands
             {
                 Success = true,
                 Token = result,
-                Id = userManager.Users.FirstOrDefault(x => x.Email == request.Email)?.Id
+                Id = user.Id
             };
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using TravelBookingPortal.Domain.Enitites.PreferenceEnitites;
 using TravelBookingPortal.Domain.Enitites.User;
 using TravelBookingPortal.Domain.Repositories.UserProfile;
 using TravelBookingPortal.Infrastructure.DbContext;
@@ -17,7 +16,7 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Profile
 
         public async Task<ApplicationUser> GetUserProfileAsync(string userId)
         {
-            var user = await _context.Users.Include(p => p.Preferences).FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
                 throw new Exception("User not found");

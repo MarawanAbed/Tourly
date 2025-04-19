@@ -31,12 +31,12 @@ namespace TravelBookingPortal.Infrastructure.Repositories.ItineraryRepo
 
         public async Task<List<Itinerary>> GetAllAsync()
         {
-            return await _context.Itineraries.Include(i => i.Items).ToListAsync();
+            return await _context.Itineraries.ToListAsync();
         }
 
         public async Task<Itinerary> GetByIdAsync(int id)
         {
-            return await _context.Itineraries.Include(i => i.Items)
+            return await _context.Itineraries
                                             .FirstOrDefaultAsync(i => i.ItineraryId == id);
         }
 
@@ -57,7 +57,7 @@ namespace TravelBookingPortal.Infrastructure.Repositories.ItineraryRepo
         {
             return await _context.Itineraries
                 .Where(i => i.UserId == userId)
-                .Include(i => i.Items)
+               
                 .ToListAsync();
         }
     }

@@ -10,7 +10,6 @@ namespace TravelBookingPortal.Domain.Enitites.RoomEntities
         public string RoomNumber { get; set; }
         public string RoomType { get; set; } 
         public decimal PricePerNight { get; set; }
-        public bool IsAvailable { get; set; }
         public string ImageUrl { get; set; }
 
         public Hotel? Hotel { get; set; }

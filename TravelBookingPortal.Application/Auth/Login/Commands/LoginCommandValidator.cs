@@ -1,7 +1,6 @@
 ﻿
 
 using FluentValidation;
-using TravelBookingPortal.Application.Auth.Login.Response;
 
 namespace TravelBookingPortal.Application.Auth.Login.Commands
 {

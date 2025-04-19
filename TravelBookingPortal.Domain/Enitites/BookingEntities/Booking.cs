@@ -13,8 +13,6 @@ namespace TravelBookingPortal.Domain.Enitites.BookingEntities
         public decimal TotalPrice { get; set; }
         public string BookingStatus { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string? PaymentId { get; set; }
-
         public ApplicationUser? User { get; set; }
         public Room? Room { get; set; } 
     }

@@ -1,14 +1,18 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using TravelBookingPortal.Application.Auth.ExternalAuth.Services;
 using TravelBookingPortal.Application.Auth.Login.Commands;
 using TravelBookingPortal.Application.Auth.logout.Commands;
 using TravelBookingPortal.Application.Auth.Register.Commands;
+
 
 namespace TravelBookingPortal.API.Controllers.Auth
 {
     [Route("[controller]")]
     [ApiController]
-    public class AuthController(IMediator mediator) : ControllerBase
+    public class AuthController(IMediator mediator,IExternalAuthServices externalAuthServices) : ControllerBase
     {
 
         [HttpPost("register")]
@@ -44,6 +48,21 @@ namespace TravelBookingPortal.API.Controllers.Auth
         {
             await mediator.Send(new LogoutCommand { UserId=userId});
             return Ok(new { message = "Logout successful" });
+        }
+
+        [HttpGet("externallogin")]
+        public IActionResult ExternalLogin([FromQuery] string provider, [FromQuery] string returnUrl)
+        {
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "auth", new { returnUrl });
+            var properties = externalAuthServices.ConfigureExternalLogin(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet("externallogin-callback")]
+        public async Task<IActionResult> ExternalLoginCallback()
+        {
+            var jwt = await externalAuthServices.HandleExternalLoginCallback();
+            return Ok(new { token = jwt });
         }
 
     }
