@@ -30,6 +30,7 @@ namespace TravelBookingPortal.Infrastructure.Repositories.ReviewRepo
         public async Task<List<Review>> GetByHotelIdAsync(int hotelId)
         {
             return await context.Reviews
+                .Include(m=>m.User)
                 .Where(r => r.HotelId == hotelId)
                 .ToListAsync();
         }
