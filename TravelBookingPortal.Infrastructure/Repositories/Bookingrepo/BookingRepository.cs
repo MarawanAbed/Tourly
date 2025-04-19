@@ -33,12 +33,12 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Bookingrepo
         public async Task<Booking> GetBookingByIdAsync(int id)
 
         {
-            var booking = await _context.Bookings
-                    .Where(b => b.BookingId == id)
-                    .FirstOrDefaultAsync();
+            return await _context.Bookings
+       .AsNoTracking() 
+       .FirstOrDefaultAsync(b => b.BookingId == id);
 
 
-            return booking;
+            
             
             
             

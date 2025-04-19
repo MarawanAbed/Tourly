@@ -15,23 +15,29 @@ namespace TravelBookingPortal.Infrastructure.Repositories.ReviewRepo
             context = _context;
         }
 
-        public async Task AddAsync(Review review)
+        public async Task AddAsync(Review review,string hotelName)
         {
-            context.Reviews.Add(review);
+            var hotel = await context.Hotels
+          .FirstOrDefaultAsync(h => h.Name == hotelName);
+            review.HotelId = hotel.HotelId;
+           await context.Reviews.AddAsync(review);
             await context.SaveChangesAsync();
         }
 
 
         public async Task<List<Review>> GetByUserIdAsync(string userId)
         {
-            return await context.Reviews.Where(U=>U.UserId == userId).ToListAsync();
+            return await context.Reviews.Where(U => U.UserId == userId).Include(m => m.User)
+                            .Include(r => r.Hotel)
+                            .ToListAsync();
         }
 
-        public async Task<List<Review>> GetByHotelIdAsync(int hotelId)
+        public async Task<List<Review>> GetByHotelByNameAsync(string hotelName)
         {
             return await context.Reviews
                 .Include(m=>m.User)
-                .Where(r => r.HotelId == hotelId)
+                .Include(r=>r.Hotel)
+                .Where(r => r.Hotel.Name==hotelName)
                 .ToListAsync();
         }
 
