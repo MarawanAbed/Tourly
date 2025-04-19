@@ -17,5 +17,6 @@ namespace TravelBookingPortal.Application.Reviews.DTOs
         public string UserName { get; set; }
 
         public string UserImage { get; set; }
+        public string? HotelName { get; set; }
     }
 }

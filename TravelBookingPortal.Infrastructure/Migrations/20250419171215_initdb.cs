@@ -202,27 +202,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserPreferences",
-                columns: table => new
-                {
-                    PreferenceId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PreferenceType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PreferenceValue = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserPreferences", x => x.PreferenceId);
-                    table.ForeignKey(
-                        name: "FK_UserPreferences_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Hotels",
                 columns: table => new
                 {
@@ -241,27 +220,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                         column: x => x.CityId,
                         principalTable: "Cities",
                         principalColumn: "CityId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ItineraryItems",
-                columns: table => new
-                {
-                    ItemId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItineraryId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItineraryItems", x => x.ItemId);
-                    table.ForeignKey(
-                        name: "FK_ItineraryItems_Itineraries_ItineraryId",
-                        column: x => x.ItineraryId,
-                        principalTable: "Itineraries",
-                        principalColumn: "ItineraryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -304,7 +262,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     RoomNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoomType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PricePerNight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -331,7 +288,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BookingStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaymentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HotelId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -421,11 +377,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItineraryItems_ItineraryId",
-                table: "ItineraryItems",
-                column: "ItineraryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_HotelId",
                 table: "Reviews",
                 column: "HotelId");
@@ -440,11 +391,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                 table: "Rooms",
                 columns: new[] { "HotelId", "RoomNumber" },
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserPreferences_UserId",
-                table: "UserPreferences",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -469,13 +415,10 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                 name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "ItineraryItems");
+                name: "Itineraries");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
-
-            migrationBuilder.DropTable(
-                name: "UserPreferences");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -484,13 +427,10 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                 name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Itineraries");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Hotels");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Cities");

@@ -12,7 +12,7 @@ using TravelBookingPortal.Infrastructure.DbContext;
 namespace TravelBookingPortal.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelBookingPortalDbContext))]
-    [Migration("20250417214221_initdb")]
+    [Migration("20250419171215_initdb")]
     partial class initdb
     {
         /// <inheritdoc />
@@ -182,9 +182,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.Property<int?>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaymentId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
@@ -287,58 +284,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.ToTable("Itineraries");
                 });
 
-            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.ItineraryEntities.ItineraryItem", b =>
-                {
-                    b.Property<int>("ItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemId"));
-
-                    b.Property<DateTime?>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ItineraryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ItemId");
-
-                    b.HasIndex("ItineraryId");
-
-                    b.ToTable("ItineraryItems");
-                });
-
-            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.PreferenceEnitites.Preference", b =>
-                {
-                    b.Property<int>("PreferenceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PreferenceId"));
-
-                    b.Property<string>("PreferenceType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PreferenceValue")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PreferenceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserPreferences");
-                });
-
             modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.ReviewEntities.Review", b =>
                 {
                     b.Property<int>("ReviewId")
@@ -386,9 +331,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
 
                     b.Property<decimal>("PricePerNight")
                         .HasColumnType("decimal(18,2)");
@@ -598,28 +540,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.ItineraryEntities.ItineraryItem", b =>
-                {
-                    b.HasOne("TravelBookingPortal.Domain.Enitites.ItineraryEntities.Itinerary", "Itinerary")
-                        .WithMany("Items")
-                        .HasForeignKey("ItineraryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Itinerary");
-                });
-
-            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.PreferenceEnitites.Preference", b =>
-                {
-                    b.HasOne("TravelBookingPortal.Domain.Enitites.User.ApplicationUser", "User")
-                        .WithMany("Preferences")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.ReviewEntities.Review", b =>
                 {
                     b.HasOne("TravelBookingPortal.Domain.Enitites.HotelEntities.Hotel", "Hotel")
@@ -664,11 +584,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.Navigation("Rooms");
                 });
 
-            modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.ItineraryEntities.Itinerary", b =>
-                {
-                    b.Navigation("Items");
-                });
-
             modelBuilder.Entity("TravelBookingPortal.Domain.Enitites.RoomEntities.Room", b =>
                 {
                     b.Navigation("Bookings");
@@ -679,8 +594,6 @@ namespace TravelBookingPortal.Infrastructure.Migrations
                     b.Navigation("Bookings");
 
                     b.Navigation("Itineraries");
-
-                    b.Navigation("Preferences");
 
                     b.Navigation("Reviews");
                 });

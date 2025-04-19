@@ -27,7 +27,9 @@ namespace TravelBookingPortal.Infrastructure.Repositories.ReviewRepo
 
         public async Task<List<Review>> GetByUserIdAsync(string userId)
         {
-            return await context.Reviews.Where(U=>U.UserId == userId).ToListAsync();
+            return await context.Reviews.Where(U => U.UserId == userId).Include(m => m.User)
+                            .Include(r => r.Hotel)
+                            .ToListAsync();
         }
 
         public async Task<List<Review>> GetByHotelByNameAsync(string hotelName)

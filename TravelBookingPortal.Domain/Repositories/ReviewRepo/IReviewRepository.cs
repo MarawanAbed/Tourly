@@ -18,6 +18,7 @@ namespace TravelBookingPortal.Domain.Repositories.ReviewRepo
         public Task DeleteAsync(int reviewId);
 
         public Task UpdateAsync(Review review);
-        Task<Review> GetByIdAsync(int reviewId);
+        public Task<Review> GetByIdAsync(int reviewId);
+
     }
 }
