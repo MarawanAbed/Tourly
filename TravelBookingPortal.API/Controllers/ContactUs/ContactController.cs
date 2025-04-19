@@ -21,7 +21,7 @@ namespace TravelBookingPortal.API.Controllers.ContactUs
         {
             var result = await _mediator.Send(command);
             if (result)
-                return Ok("Message sent successfully!");
+                return Ok(new { message = "Message sent successfully!" });
             else
                 return StatusCode(500, "Error sending message.");
         }
