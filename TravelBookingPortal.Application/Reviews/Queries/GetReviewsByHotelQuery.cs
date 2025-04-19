@@ -10,7 +10,7 @@ namespace TravelBookingPortal.Application.RoomLogic.Queries.Handlers
 {
     public class GetReviewsByHotelQuery : IRequest<List<ReviewDto>>
     {
-        public int HotelId { get; set; }
+        public string HotelName { get; set; }
     }
    
 }

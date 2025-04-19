@@ -13,7 +13,7 @@ namespace TravelBookingPortal.Domain.Repositories.ReviewRepo
 
         public Task<List<Review>> GetByUserIdAsync(string userId);
 
-        public Task<List<Review>> GetByHotelIdAsync(int hotelId);
+        public Task<List<Review>> GetByHotelByNameAsync(string hotelName);
 
         public Task DeleteAsync(int reviewId);
 

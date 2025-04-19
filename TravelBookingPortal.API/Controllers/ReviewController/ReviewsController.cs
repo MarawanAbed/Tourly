@@ -33,10 +33,10 @@ namespace TravelBookingPortal.API.Controllers.ReviewController
             return Ok(result);
         }
 
-        [HttpGet("hotel/{hotelId}")]
-        public async Task<IActionResult> GetHotelReviews(int hotelId)
+        [HttpGet("hotel/{hotelName}")]
+        public async Task<IActionResult> GetHotelReviews(string hotelName)
         {
-            var result = await _mediator.Send(new GetReviewsByHotelQuery { HotelId = hotelId });
+            var result = await _mediator.Send(new GetReviewsByHotelQuery { HotelName = hotelName });
             return Ok(result);
         }
 

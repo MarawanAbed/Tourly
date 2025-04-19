@@ -23,7 +23,7 @@ namespace TravelBookingPortal.Application.RoomLogic.Queries.Handlers
 
         public async Task<List<ReviewDto>> Handle(GetReviewsByHotelQuery request, CancellationToken cancellationToken)
         {
-            var reviews = await _repository.GetByHotelIdAsync(request.HotelId);
+            var reviews = await _repository.GetByHotelByNameAsync(request.HotelName);
             return _mapper.Map<List<ReviewDto>>(reviews);
         }
     }
