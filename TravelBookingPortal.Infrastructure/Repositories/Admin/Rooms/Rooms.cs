@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
+using TravelBookingPortal.Domain.Enitites.HotelEntities;
 using TravelBookingPortal.Domain.Enitites.RoomEntities;
 using TravelBookingPortal.Domain.Repositories.Admin.Rooms;
 using TravelBookingPortal.Infrastructure.DbContext;
@@ -37,12 +38,19 @@ namespace TravelBookingPortal.Infrastructure.Repositories.Admin.Rooms
             var existingRoom = await _context.Rooms.FindAsync(room.RoomId);
             if (existingRoom != null)
             {
+                if (room.ImageUrl != null)
+                {
+                    existingRoom.ImageUrl = room.ImageUrl;
+                }
+                else
+                {
+                    existingRoom.ImageUrl = existingRoom.ImageUrl;
+                }
                 existingRoom.PricePerNight = room.PricePerNight;
-                existingRoom.IsAvailable = room.IsAvailable;
-                existingRoom.ImageUrl = room.ImageUrl;
+                existingRoom.IsAvailable = existingRoom.IsAvailable;
                 existingRoom.RoomType = room.RoomType;
-                existingRoom.RoomNumber = room.RoomNumber;
-                existingRoom.HotelId = room.HotelId;
+                existingRoom.RoomNumber = existingRoom.RoomNumber;
+                existingRoom.HotelId = existingRoom.HotelId;
                 await _context.SaveChangesAsync();
             }
         }

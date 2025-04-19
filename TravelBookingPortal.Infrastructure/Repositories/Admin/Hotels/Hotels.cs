@@ -1,6 +1,7 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
+using TravelBookingPortal.Domain.Enitites.CityEnities;
 using TravelBookingPortal.Domain.Enitites.HotelEntities;
 using TravelBookingPortal.Domain.Repositories.Admin.Hotels;
 using TravelBookingPortal.Infrastructure.DbContext;
@@ -38,10 +39,17 @@ public class Hotels(TravelBookingPortalDbContext _context) : IHotels
         var existingHotel = await _context.Hotels.FindAsync(hotel.HotelId);
         if (existingHotel != null)
         {
+            if (hotel.ImageUrl != null)
+            {
+                existingHotel.ImageUrl = hotel.ImageUrl;
+            }
+            else
+            {
+                existingHotel.ImageUrl = existingHotel.ImageUrl;
+            }
             existingHotel.Name = hotel.Name;
             existingHotel.Description = hotel.Description;
-            existingHotel.ImageUrl = hotel.ImageUrl;
-            existingHotel.CityId = hotel.CityId;
+            existingHotel.CityId = existingHotel.CityId;
             await _context.SaveChangesAsync();
         }
     }
