@@ -7,7 +7,7 @@ using TravelBookingPortal.Application.RoomLogic.Queries.Handlers;
 
 namespace TravelBookingPortal.API.Controllers.ReviewController
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ReviewsController : ControllerBase
     {
@@ -40,7 +40,7 @@ namespace TravelBookingPortal.API.Controllers.ReviewController
             return Ok(result);
         }
 
-        [HttpDelete("{reviewId}")]
+        [HttpDelete("Delete/{reviewId}")]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
             await _mediator.Send(new DeleteReviewCommand { ReviewId = reviewId });
