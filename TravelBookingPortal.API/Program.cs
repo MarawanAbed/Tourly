@@ -1,10 +1,10 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.OpenApi.Models;
-using TravelBookingPortal.Infrastructure.Hubs;
-
-using TravelBookingPortal.Application.Extensions;
-using TravelBookingPortal.Infrastructure.Seeder.Travel;
-using TravelBookingPortal.Infrastructure.Extensions;
 using Serilog;
+using TravelBookingPortal.Application.Extensions;
+using TravelBookingPortal.Infrastructure.Extensions;
+using TravelBookingPortal.Infrastructure.Hubs;
+using TravelBookingPortal.Infrastructure.Seeder.Travel;
 
 
 namespace TravelBookingPortal.API
@@ -24,9 +24,7 @@ namespace TravelBookingPortal.API
             builder.Services.AddApplication();
 
 
-            builder.Services.AddHttpContextAccessor(); //Menna Editing Here
 
-            builder.Services.AddApplication();
 
 
             builder.Services.AddControllers();
@@ -57,7 +55,6 @@ namespace TravelBookingPortal.API
                     }
                 });
             });
-
             var myPolicy = "myPolicy";
             builder.Services.AddCors(options =>
             {
@@ -68,7 +65,7 @@ namespace TravelBookingPortal.API
                     .WithOrigins("http://localhost:4200", "https://8834-197-63-30-95.ngrok-free.app", "http://localhost:50488", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
                     .AllowAnyHeader()
                     .AllowAnyMethod();
-                    
+
                 });
             });
 
@@ -78,6 +75,7 @@ namespace TravelBookingPortal.API
             await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
 
             // Configure the HTTP request pipeline.
+            app.UseMiddleware<TravelBookingPortal.API.Middleware.ExceptionHandlingMiddleware>();
             app.UseStaticFiles();
             if (app.Environment.IsDevelopment())
             {

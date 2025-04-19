@@ -30,6 +30,7 @@ namespace TravelBookingPortal.Application.Extensions
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(applicationAssembly));
 
             services.AddHttpContextAccessor();
+
             services.AddLogging();
 
             services.AddMemoryCache();
