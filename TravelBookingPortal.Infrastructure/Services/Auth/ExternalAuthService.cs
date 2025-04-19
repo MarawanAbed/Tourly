@@ -6,6 +6,7 @@ using System.Security.Claims;
 using TravelBookingPortal.Application.Auth.ExternalAuth.Services;
 using TravelBookingPortal.Application.Auth.Services;
 using TravelBookingPortal.Domain.Enitites.User;
+using TravelBookingPortal.Domain.Enitites.ExternalAuth;
 
 namespace TravelBookingPortal.Infrastructure.Services.Auth
 {
@@ -16,7 +17,7 @@ namespace TravelBookingPortal.Infrastructure.Services.Auth
 
             return _signIn.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
         }
-        public async Task<string> HandleExternalLoginCallback()
+        public async Task<ExternalAuth> HandleExternalLoginCallback()
         {
             var info = await _signIn.GetExternalLoginInfoAsync();
             if (info == null)
@@ -52,7 +53,13 @@ namespace TravelBookingPortal.Infrastructure.Services.Auth
                 }
                 await _userManager.AddLoginAsync(user, info);
             }
-            return _generateToken.GenerateJwtToken(user);
+            var token = _generateToken.GenerateJwtToken(user);
+
+            return new ExternalAuth
+            {
+                Token = token,
+                UserId = user.Id
+            };
         }
     }
 }

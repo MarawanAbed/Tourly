@@ -61,8 +61,17 @@ namespace TravelBookingPortal.API.Controllers.Auth
         [HttpGet("externallogin-callback")]
         public async Task<IActionResult> ExternalLoginCallback()
         {
-            var jwt = await externalAuthServices.HandleExternalLoginCallback();
-            return Ok(new { token = jwt });
+            var result = await externalAuthServices.HandleExternalLoginCallback();
+
+            // إذا ما كان في JWT أو فشل الدخول، رجّع Redirect لصفحة تسجيل الدخول
+            if (result == null || string.IsNullOrEmpty(result.Token))
+            {
+                return Redirect("http://localhost:4200/Login?error=OAuthFailed");
+            }
+
+            // ✅ إرسال التوكن والـ userId إلى Angular عبر query string
+            var redirectUrl = $"http://localhost:4200/Login?token={result.Token}&userId={result.UserId}";
+            return Redirect(redirectUrl);
         }
 
     }
