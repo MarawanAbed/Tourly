@@ -2,11 +2,8 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using TravelBookingPortal.Application.Payment.Command.Model;
-using TravelBookingPortal.Application.RoomLogic.Commands.Handler;
-using TravelBookingPortal.Application.RoomLogic.Commands.Models;
-using TravelBookingPortal.Domain.IHubs;
 using TravelBookingPortal.Application.Admin.Booking.Mapper;
+using TravelBookingPortal.Application.Payment.Command;
 
 
 namespace TravelBookingPortal.Application.Extensions
@@ -34,11 +31,7 @@ namespace TravelBookingPortal.Application.Extensions
             services.AddLogging();
 
             services.AddMemoryCache();
-            services.AddTransient<IRequestHandler<ConfirmBookingAfterPaymentCommand, Unit>, ConfirmBookingAfterPaymentHandler>();
-            
-            
-
-
+            services.AddTransient<IRequestHandler<ConfirmBookingAfterPaymentCommand, Unit>, ConfirmBookingAfterPaymentCommandHandler>();
 
         }
     }

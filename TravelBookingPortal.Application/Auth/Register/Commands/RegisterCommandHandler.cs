@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using TravelBookingPortal.Application.Auth.Register.Response;
-using TravelBookingPortal.Application.Auth.Register.Services;
-using TravelBookingPortal.Domain.Enitites.User;
+using TravelBookingPortal.Application.Services.Register;
+using TravelBookingPortal.Domain.Entites.User;
 
 namespace TravelBookingPortal.Application.Auth.Register.Commands
 {

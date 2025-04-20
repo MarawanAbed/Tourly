@@ -2,7 +2,7 @@
 
 using AutoMapper;
 using TravelBookingPortal.Application.Auth.Register.Commands;
-using TravelBookingPortal.Domain.Enitites.User;
+using TravelBookingPortal.Domain.Entites.User;
 
 namespace TravelBookingPortal.Application.Auth.Register.Mapper
 {

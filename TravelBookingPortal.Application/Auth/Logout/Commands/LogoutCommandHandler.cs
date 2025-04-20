@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using TravelBookingPortal.Application.Auth.Logout.Services;
+using TravelBookingPortal.Application.Services.Logout;
 
 
 namespace TravelBookingPortal.Application.Auth.logout.Commands

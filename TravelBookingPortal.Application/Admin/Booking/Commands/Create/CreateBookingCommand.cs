@@ -1,8 +1,7 @@
 ﻿
 
 using MediatR;
-using TravelBookingPortal.Domain.Enitites.RoomEntities;
-using TravelBookingPortal.Domain.Enitites.User;
+
 
 namespace TravelBookingPortal.Application.Admin.Booking.Commands.Create
 {

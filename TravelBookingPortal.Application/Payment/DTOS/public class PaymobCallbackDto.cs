@@ -1,24 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-public class PaymentCallbackDto
+namespace TravelBookingPortal.Application.Payment.Dtos
 {
-    [Required]
-    public string Message { get; set; }
+    public class PaymentCallbackDto
+    {
+        [Required]
+        public string Message { get; set; }
 
-    [Required]
-    public long TransactionId { get; set; }
+        [Required]
+        public long TransactionId { get; set; }
 
-    [Required]
-    public CallbackOrderObj Obj { get; set; }
-}
+        [Required]
+        public CallbackOrderObj Obj { get; set; }
+    }
 
-public class CallbackOrderObj
-{
-    public CallbackOrder Order { get; set; }
-}
+    public class CallbackOrderObj
+    {
+        public CallbackOrder Order { get; set; }
+    }
 
-public class CallbackOrder
-{
-    [Required]
-    public string MerchantOrderId { get; set; }
+    public class CallbackOrder
+    {
+        [Required]
+        public string MerchantOrderId { get; set; }
+    }
 }

@@ -1,10 +1,12 @@
-using Microsoft.AspNetCore.Diagnostics;
+
 using Microsoft.OpenApi.Models;
 using Serilog;
+using TravelBookingPortal.API.Middlewares;
 using TravelBookingPortal.Application.Extensions;
+using TravelBookingPortal.Application.Interfaces.Seeder.Travel;
 using TravelBookingPortal.Infrastructure.Extensions;
 using TravelBookingPortal.Infrastructure.Hubs;
-using TravelBookingPortal.Infrastructure.Seeder.Travel;
+using TravelBookingPortal.Persistence.Extensions;
 
 
 namespace TravelBookingPortal.API
@@ -14,21 +16,20 @@ namespace TravelBookingPortal.API
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             builder.Host.UseSerilog((context, services, configuration) =>
             {
                 configuration
                 .ReadFrom.Configuration(context.Configuration);
 
             });
+            builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
 
 
 
-
-
             builder.Services.AddControllers();
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
@@ -74,8 +75,7 @@ namespace TravelBookingPortal.API
             var scope = app.Services.CreateScope();
             await scope.ServiceProvider.GetRequiredService<ITravelBookingSeeder>().Seed();
 
-            // Configure the HTTP request pipeline.
-            app.UseMiddleware<TravelBookingPortal.API.Middleware.ExceptionHandlingMiddleware>();
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseStaticFiles();
             if (app.Environment.IsDevelopment())
             {
@@ -84,14 +84,13 @@ namespace TravelBookingPortal.API
             }
 
             app.UseHttpsRedirection();
-            app.UseRouting(); //Rehab editing here
-            app.UseCors(myPolicy); //Rehab editing here
+            app.UseRouting(); 
+            app.UseCors(myPolicy);
             app.UseAuthentication();
             app.UseAuthorization();
 
 
-            //Mapping HuBs
-            app.MapHub<BookingStatusHub>("/bookingStatusHub"); //Rehab Editing Here
+            app.MapHub<BookingStatusHub>("/bookingStatusHub");
             app.MapControllers();
 
             app.Run();

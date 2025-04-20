@@ -1,30 +1,17 @@
 ﻿using AutoMapper;
 using MediatR;
 using TravelBookingPortal.Application.Admin.Booking.Dtos;
-using TravelBookingPortal.Domain.Repositories.Admin.Booking;
+using TravelBookingPortal.Application.Interfaces.Repositories.Admin.Booking;
 
 namespace TravelBookingPortal.Application.Admin.Booking.Queries
 {
-    public class GetAllBookingsQuery : IRequest<List<GetAllBookingsDto>>
+
+    public class GetAllBookingsQueriesHandler(IMapper mapper, IBookingRepository bookings) : IRequestHandler<GetAllBookingsQueries, List<GetAllBookingsDto>>
     {
-        public int HotelId { get; set; }
-    }
-
-    public class GetAllBookingsQueriesHandler : IRequestHandler<GetAllBookingsQuery, List<GetAllBookingsDto>>
-    {
-        private readonly IMapper _mapper;
-        private readonly IBooking _bookings;
-
-        public GetAllBookingsQueriesHandler(IMapper mapper, IBooking bookings)
+        public async Task<List<GetAllBookingsDto>> Handle(GetAllBookingsQueries request, CancellationToken cancellationToken)
         {
-            _mapper = mapper;
-            _bookings = bookings;
-        }
-
-        public async Task<List<GetAllBookingsDto>> Handle(GetAllBookingsQuery request, CancellationToken cancellationToken)
-        {
-            var bookingsList = await _bookings.GetAllBookings();
-            return _mapper.Map<List<GetAllBookingsDto>>(bookingsList);
+            var bookingsList = await bookings.GetAllBookings();
+            return mapper.Map<List<GetAllBookingsDto>>(bookingsList);
         }
     }
 }

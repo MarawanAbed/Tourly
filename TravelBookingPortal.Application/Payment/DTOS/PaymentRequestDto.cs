@@ -1,6 +1,6 @@
 ﻿
 
-namespace TravelBookingPortal.Application.Payment.DTOS
+namespace TravelBookingPortal.Application.Payment.Dtos
 {
     public class PaymentRequestDto
     {

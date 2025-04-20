@@ -1,10 +1,8 @@
 ﻿
 
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using TravelBookingPortal.Application.Auth.Login.Response;
-using TravelBookingPortal.Application.Auth.Login.Services;
-using TravelBookingPortal.Domain.Enitites.User;
+using TravelBookingPortal.Application.Services.Login;
 
 namespace TravelBookingPortal.Application.Auth.Login.Commands
 {

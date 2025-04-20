@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TravelBookingPortal.Application\TravelBookingPortal.Application.csproj" />
     <ProjectReference Include="..\TravelBookingPortal.Infrastructure\TravelBookingPortal.Infrastructure.csproj" />
+    <ProjectReference Include="..\TravelBookingPortal.Persistence\TravelBookingPortal.Persistence.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
