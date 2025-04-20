@@ -13,7 +13,6 @@ namespace TravelBookingPortal.Application.UserProfile.Dtos
         public DateTime DateOfBirth { get; set; }
         public string? Street { get; set; }
         public DateTime CreatedAt { get; set; }
-        public List<PreferenceDto> Preferences { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }      
     }

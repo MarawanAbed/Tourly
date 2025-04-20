@@ -17,7 +17,6 @@ namespace TravelBookingPortal.Application.UserProfile.Commands
         public string Email { get; set; }
         public string UserName { get; set; }
 
-        public List<PreferenceDto> Preferences { get; set; }
     }
    
 }
