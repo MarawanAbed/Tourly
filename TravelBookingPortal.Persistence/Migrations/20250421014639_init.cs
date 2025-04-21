@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TravelBookingPortal.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class IntializeDatabase : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -279,7 +279,7 @@ namespace TravelBookingPortal.Persistence.Migrations
                 columns: table => new
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "2000, 1"),
+                        .Annotation("SqlServer:Identity", "7000, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoomId = table.Column<int>(type: "int", nullable: false),
                     CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),

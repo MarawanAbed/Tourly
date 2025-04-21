@@ -13,18 +13,20 @@ namespace TravelBookingPortal.Persistence.Repositories.Booking
 
         public async Task DeleteBookingForUserAsync(int bookingId)
         {
-            context.Bookings.Remove(new BookingEntities { BookingId = bookingId });
-            await context.SaveChangesAsync();
-
-
+            var booking = await context.Bookings.FindAsync(bookingId);
+            if (booking != null)
+            {
+                context.Bookings.Remove(booking);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task<BookingEntities> GetBookingByIdAsync(int id)
 
         {
             return await context.Bookings
-       .AsNoTracking()
-       .FirstOrDefaultAsync(b => b.BookingId == id);
+           
+           .FirstOrDefaultAsync(b => b.BookingId == id);
 
 
         }
@@ -46,10 +48,16 @@ namespace TravelBookingPortal.Persistence.Repositories.Booking
 
         public async Task UpdateAsync(BookingEntities booking)
         {
-            logger.LogInformation("Before update: " + booking.BookingStatus);
-            booking.BookingStatus = "Confirmed";
-            await context.SaveChangesAsync();
-            logger.LogInformation("After update: " + booking.BookingStatus);
+            var existingBooking = await context.Bookings.FindAsync(booking.BookingId);
+            if (existingBooking != null)
+            {
+                existingBooking.BookingStatus = booking.BookingStatus;
+                existingBooking.TotalPrice = booking.TotalPrice;
+
+                await context.SaveChangesAsync();
+
+                logger.LogInformation("Updated Booking ID {BookingId}", booking.BookingId);
+            }
         }
     }
 }

@@ -14,6 +14,8 @@ namespace TravelBookingPortal.Application.RoomLogic.Mapper
             CreateMap<RoomEntities, GetOneRoomDTO>().ForMember(dest => dest.HotelName, opt => opt.MapFrom(src => src.Hotel.Name))
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.Hotel.City.Name))
                 ;
+            CreateMap<RoomEntities, GetRoomsDTO>()
+            .ForMember(dest => dest.HotelName, opt => opt.MapFrom(src => src.Hotel.Name));
         }
     }
 }

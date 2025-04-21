@@ -67,7 +67,7 @@ namespace TravelBookingPortal.Persistence.Persistence
             // Set BookingId to start from 2000
             builder.Entity<BookingEntities>()
                 .Property(b => b.BookingId)
-                .UseIdentityColumn(2000, 1);
+                .UseIdentityColumn(7000, 1);
         }
     }
 }

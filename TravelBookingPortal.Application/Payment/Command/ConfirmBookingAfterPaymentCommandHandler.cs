@@ -17,7 +17,12 @@ namespace TravelBookingPortal.Application.Payment.Command
 
 
 
+            //await bookingRepository.UpdateAsync(booking);
+            booking.BookingStatus = "Confirmed";
+
             await bookingRepository.UpdateAsync(booking);
+
+            
 
 
             await notifier.NotifyBookingStatusAsync(booking.RoomId, "Confirmed");

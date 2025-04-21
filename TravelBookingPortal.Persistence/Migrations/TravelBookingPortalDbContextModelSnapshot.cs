@@ -161,7 +161,7 @@ namespace TravelBookingPortal.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 2000L);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"), 7000L);
 
                     b.Property<string>("BookingStatus")
                         .IsRequired()
