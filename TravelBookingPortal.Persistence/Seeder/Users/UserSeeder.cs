@@ -17,9 +17,7 @@ namespace TravelBookingPortal.Persistence.Seeder.Users
         {
             var users = new[]
     {
-                new { Email = "admin@example.com", FirstName = "Admin", LastName = "User", Password = "Admin@123", Role = "Admin" },
-                new { Email = "john.doe@example.com", FirstName = "John", LastName = "Doe", Password = "Password123@", Role = "User" },
-                new { Email = "jane.smith@example.com", FirstName = "Jane", LastName = "Smith", Password = "Password123@", Role = "User" }
+                new { Email = "admin@tourly.com",UserName="AhmedAli", FirstName = "Ahmed", LastName = "Ali", Password = "Admin@123", Role = "Admin" },
             };
 
             foreach (var userData in users)
@@ -28,17 +26,16 @@ namespace TravelBookingPortal.Persistence.Seeder.Users
                 {
                     var user = new ApplicationUser
                     {
-                        UserName = userData.Email,
+                        UserName = userData.UserName,
                         Email = userData.Email,
                         FirstName = userData.FirstName,
                         PhoneNumber = "1234567890",
+                        ImageUrl= "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                         State = "State",
                         City = "City",
                         Street = "street",
                         LastName = userData.LastName,
                         CreatedAt = DateTime.UtcNow
-
-
                     };
 
                     var result = await userManager.CreateAsync(user, userData.Password);

@@ -4,7 +4,7 @@ using TravelBookingPortal.Application.Room.Dtos;
 using TravelBookingPortal.Domain.Entites.Booking;
 using TravelBookingPortal.Domain.Entites.Room;
 
-namespace TravelBookingPortal.Application.RoomLogic.Mapper
+namespace TravelBookingPortal.Application.Room.Mapper
 {
     public partial class RoomProfile : Profile
     {

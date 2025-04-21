@@ -31,20 +31,20 @@ namespace TravelBookingPortal.Persistence.Seeder.Travel
                 // Seed Users
                 await userSeeder.SeedUsers();
                 //Seed Cities
-                await citySeeder.SeedCities();
+                //await citySeeder.SeedCities();
 
-                // Seed Hotels and Rooms
-                await hotelSeeder.SeedHotelsAndRooms();
+                //// Seed Hotels and Rooms
+                //await hotelSeeder.SeedHotelsAndRooms();
 
 
-                // Seed Bookings
-                await bookingSeeder.SeedBookings();
+                //// Seed Bookings
+                //await bookingSeeder.SeedBookings();
 
-                // Seed Itineraries and Items
-                await itinerarySeeder.SeedItinerariesAndItems();
+                //// Seed Itineraries and Items
+                //await itinerarySeeder.SeedItinerariesAndItems();
 
-                // Seed Reviews
-                await reviewSeeder.SeedReviews();
+                //// Seed Reviews
+                //await reviewSeeder.SeedReviews();
 
 
             }
