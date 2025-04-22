@@ -2,6 +2,7 @@
 using MediatR;
 using TravelBookingPortal.Application.Helper;
 using TravelBookingPortal.Application.Interfaces.Repositories.UserProfile;
+using TravelBookingPortal.Application.UserProfile.Response;
 
 namespace TravelBookingPortal.Application.UserProfile.Commands
 {
@@ -15,16 +16,20 @@ namespace TravelBookingPortal.Application.UserProfile.Commands
                 Console.WriteLine("User not found");
                 return false;
             }
+            string imageUrl = await ImageUpload.UploadImage(request.Image);
 
-            string imageUrl=await ImageUpload.UploadImage(request.Image);
-             
+            var result = await profileRepo.UpdateUserProfileAsync(request.UserId, request.FirstName, request.LastName, imageUrl, request.PhoneNumber, request.State, request.City, request.Street, request.Email, request.UserName);
 
-
-            await profileRepo.UpdateUserProfileAsync(request.UserId, request.FirstName,request.LastName,imageUrl, request.PhoneNumber,request.State,request.City,request.Street,request.Email,request.UserName);
-
-            return true;
-
+            if (result)
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Failed to update user profile");
+                return false;
+            }
         }
     }
-    
+
 }

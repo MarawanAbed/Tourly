@@ -21,7 +21,7 @@ namespace TravelBookingPortal.API
             {
                 configuration
                 .ReadFrom.Configuration(context.Configuration);
-
+                
             });
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddInfrastructure(builder.Configuration);
@@ -63,7 +63,7 @@ namespace TravelBookingPortal.API
                 {
                     policy
 
-                    .WithOrigins("http://localhost:4200", "https://f8c7-197-63-49-3.ngrok-free.app", "http://localhost:51819", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
+                    .WithOrigins( "http://localhost:4200","https://f8c7-197-63-49-3.ngrok-free.app", "http://localhost:51819", "https://8cff-197-63-30-95.ngrok-free.app") //Rehab editing here
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();

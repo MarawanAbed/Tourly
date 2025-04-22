@@ -7,5 +7,7 @@ namespace TravelBookingPortal.Application.Auth.Register.Response
         public string Token { get; set; }
 
         public string Id { get; set; }
+        public string ErrorMessage { get; set; } // Add this property
+
     }
 }

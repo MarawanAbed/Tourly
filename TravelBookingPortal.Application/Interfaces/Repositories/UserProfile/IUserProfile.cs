@@ -5,7 +5,7 @@ namespace TravelBookingPortal.Application.Interfaces.Repositories.UserProfile
     public interface IUserProfileRepository
     {
         public Task<ApplicationUser> GetUserProfileAsync(string userId);
-        public Task UpdateUserProfileAsync(string UserId, string FirstName,
+        public Task<bool> UpdateUserProfileAsync(string UserId, string FirstName,
          string LastName,
          string? ImageUrl,
          string PhoneNumber,

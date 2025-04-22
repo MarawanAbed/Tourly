@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using TravelBookingPortal.Application.UserProfile.Dtos;
+using TravelBookingPortal.Application.UserProfile.Response;
 
 namespace TravelBookingPortal.Application.UserProfile.Commands
 {

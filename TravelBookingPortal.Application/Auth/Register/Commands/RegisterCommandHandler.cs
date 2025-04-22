@@ -12,22 +12,24 @@ namespace TravelBookingPortal.Application.Auth.Register.Commands
         {
 
             var user= mapper.Map<ApplicationUser>(request);
-            var result = await registerService.Register(user, request.Password);
-            if(result == null)
+            var (success, token, message) = await registerService.Register(user, request.Password);
+            if (!success)
             {
                 return new RegisterResponse
                 {
                     Success = false,
-                    Token = "null",
-                    Id=null
-
+                    Token = null,
+                    Id = null,
+                    ErrorMessage = message // Include the error message in the response
                 };
             }
+
             return new RegisterResponse
             {
                 Success = true,
-                Token = result,
-                Id = user.Id
+                Token = token,
+                Id = user.Id,
+                ErrorMessage = null
             };
         }
     }

@@ -61,15 +61,15 @@ namespace TravelBookingPortal.API.Controllers.Auth
         [HttpGet("externallogin-callback")]
         public async Task<IActionResult> ExternalLoginCallback()
         {
-            var result = await externalAuthServices.HandleExternalLoginCallback();
+                var result = await externalAuthServices.HandleExternalLoginCallback();
 
-            if (result == null || string.IsNullOrEmpty(result.Token))
-            {
-                return Redirect("http://localhost:4200/Login?error=OAuthFailed");
-            }
+                if (result == null || string.IsNullOrEmpty(result.Token))
+                {
+                    return Redirect("http://localhost:4200/Login?error=OAuthFailed");
+                }
 
-            var redirectUrl = $"http://localhost:4200/Login?token={result.Token}&userId={result.UserId}";
-            return Redirect(redirectUrl);
+                var redirectUrl = $"http://localhost:4200/Login?token={result.Token}&userId={result.UserId}";
+                return Redirect(redirectUrl);
         }
 
     }

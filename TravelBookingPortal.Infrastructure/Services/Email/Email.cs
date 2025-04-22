@@ -23,20 +23,24 @@ namespace TravelBookingPortal.Infrastructure.Services.Email
 
                 var mailMessage = new MailMessage
                 {
-                    From = new MailAddress(from),
+                    From = new MailAddress(configuration["EmailSettings:FromEmail"], "Tourly Contact Form"),
                     Subject = subject,
                     Body = body,
                     IsBodyHtml = false
                 };
                 mailMessage.To.Add(to);
+                mailMessage.ReplyToList.Add(new MailAddress(from));
 
                 await smtpClient.SendMailAsync(mailMessage);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+
+                Console.WriteLine("Email send failed: " + ex.Message);
                 return false;
             }
         }
+
     }
 }

@@ -31,6 +31,14 @@ namespace TravelBookingPortal.Infrastructure.Services.ExternalAuth
             else
             {
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                if (string.IsNullOrEmpty(email))
+                {
+                    throw new Exception("Email claim is missing from the external login provider.");
+                }
+
+                var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName) ?? "Unknown";
+                var lastName = info.Principal.FindFirstValue(ClaimTypes.Surname) ?? "Unknown";
+
                 user = await _userManager.FindByEmailAsync(email);
 
                 if (user == null)
